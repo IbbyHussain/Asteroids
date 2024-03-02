@@ -62,8 +62,12 @@ int main()
         Asteroid.rotate(Rotation * dt.asSeconds());
         window.draw(Asteroid);
 
+        // Positiona nd size of text
+        sf::Vector2f textPosition = { 100.f, 700.f };
+        unsigned int textSize = 36; // Set your desired size
+
+        displayText(window, "Lives: ", sf::Color::Red, textPosition, textSize);
        
-        displayText(window, "Hello", sf::Color::Red);
 
         //-----------------------------------------------------------------------------------
         // Display the updated game state
@@ -73,27 +77,23 @@ int main()
     return 0;
 }
 
-void displayText(sf::RenderWindow& window, const std::string& text, const sf::Color& fillColor)
+void displayText(sf::RenderWindow& window, const std::string& text, const sf::Color& fillColor, const sf::Vector2f& position, unsigned int characterSize)
 {
     sf::Text sfmlText;
 
-    // Use the ystem font
+    // Use the system font
     sf::Font font;
     if (!font.loadFromFile("Assets/arial.ttf")) {
-        
-        std::cout << "error loading font";
+        std::cout << "Error loading font" << std::endl;
+        return; // Exit the function if the font cannot be loaded
     }
 
-    // Set the values of the text, font, text and colour
+    // Set the values of the text
     sfmlText.setFont(font);
     sfmlText.setString(text);
     sfmlText.setFillColor(fillColor);
-
-    sfmlText.setCharacterSize(24);
-
-    // Set the position of the text to the centre of the screen
-    sf::FloatRect textRect = sfmlText.getLocalBounds();
-    sfmlText.setPosition((window.getSize().x - textRect.width) / 2, (window.getSize().y - textRect.height) / 2);
+    sfmlText.setCharacterSize(characterSize);
+    sfmlText.setPosition(position);
 
     window.draw(sfmlText);
 }
