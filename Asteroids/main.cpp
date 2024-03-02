@@ -2,10 +2,8 @@
 #include "main.h"
 #include <iostream>
 #include "Player.h"
+#include "Projectile.h"
 
-//@TODO - Spawn player ship in the centre of the screen
-//@TODO - Display score and number of lives (score is 0 and lives is 3 by default)
-//@TODO - Player movement: Left, right, forwards and backwards
 //@TODO - Shoot projectiles in player direction
 //@TODO - Spawn asteriods (outside of screen). Move with constant velocity
 //@TODO - Screen Wrapping
@@ -22,7 +20,6 @@ int main()
     sf::Clock GameClock;
 
     // Grab textures and set up sprites
-    sf::Texture PlayerTexture;
     sf::Texture AsteroidTexture;
 
     //PlayerTexture.loadFromFile("Assets/Ship.png");
@@ -35,6 +32,10 @@ int main()
     Player* NewPlayer = new Player();
     NewPlayer->SetLives(5);
     NewPlayer->Render(window);
+
+    // Test projectile
+    Projectile* newProjectile = new Projectile(500, 500);
+    newProjectile->Render(window);
 
     while (window.isOpen())
     {
@@ -57,6 +58,7 @@ int main()
 
         // Update the player class
         NewPlayer->Update(window);
+        newProjectile->Update(window, dt.asSeconds());
 
         // Handle player movement inputs, using W,A,S,D
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {

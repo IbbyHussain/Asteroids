@@ -17,6 +17,7 @@ void Player::Render(sf::RenderWindow& window)
 {
     PlayerTexture.loadFromFile("Assets/Ship.png");
     PlayerSprite.setTexture(PlayerTexture);
+    PlayerSprite.setPosition(400, 400);
 
     window.draw(PlayerSprite);
 }
@@ -40,7 +41,6 @@ void Player::MoveRight(float deltaTime)
 {
     PlayerSprite.move(Speed * deltaTime, 0.f);
 }
-
 
 void Player::SetLives(int Lives)
 {
