@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Bigarn\\Asteroids\\",
+  "WorkspaceRootPath": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids\\Asteroids\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Bigarn\\Asteroids\\Asteroids\\main.cpp",
+              "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.cpp",
               "RelativeDocumentMoniker": "Asteroids\\main.cpp",
-              "ToolTip": "C:\\Bigarn\\Asteroids\\Asteroids\\main.cpp",
+              "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.cpp",
               "RelativeToolTip": "Asteroids\\main.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-02T12:44:33.974Z",
               "EditorCaption": ""

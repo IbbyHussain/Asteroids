@@ -1,5 +1,16 @@
 #include <SFML/Graphics.hpp>
 
+//@TODO - Spawn player ship in the centre of the screen
+//@TODO - Display score and number of lives (score is 0 and lives is 3 by default)
+//@TODO - Player movement: Left, right, forwards and backwards
+//@TODO - Shoot projectiles in player direction
+//@TODO - Spawn asteriods (outside of screen). Move with constant velocity
+//@TODO - Screen Wrapping
+//@TODO - Player collision and grace period
+//@TODO - Player death (Game Over)
+//@TODO - Bullet collision and player score and lives update
+//@TODO - Asteriod splitting (Large -> Medium -> Small)
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "LHG Code Exercise");
