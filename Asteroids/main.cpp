@@ -28,17 +28,13 @@ int main()
     //PlayerTexture.loadFromFile("Assets/Ship.png");
     AsteroidTexture.loadFromFile("Assets/Asteroid.png");
 
+    sf::Sprite Asteroid;
+    Asteroid.setTexture(AsteroidTexture);
+
     // Create a instance of the player 
     Player* NewPlayer = new Player();
     NewPlayer->SetLives(5);
     NewPlayer->Render(window);
-    
-
-    //sf::Sprite Player;
-    //Player.setTexture(PlayerTexture);
-
-    sf::Sprite Asteroid;
-    Asteroid.setTexture(AsteroidTexture);
 
     while (window.isOpen())
     {
@@ -62,13 +58,19 @@ int main()
         // Update the player class
         NewPlayer->Update(window);
 
-        
-        //window.draw(NewPlayer->GetPlayerSprite());
-
-        // Player ship follows the mouse
-       /* sf::Vector2f MousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-        Player.setPosition(MousePosition.x, MousePosition.y);
-        window.draw(Player);*/
+        // Handle player movement inputs, using W,A,S,D
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            NewPlayer->MoveForward(dt.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            NewPlayer->MoveBackward(dt.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            NewPlayer->MoveLeft(dt.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            NewPlayer->MoveRight(dt.asSeconds());
+        }
 
         // Asteroid spins in the center of the screen
         Asteroid.setPosition(400, 400);

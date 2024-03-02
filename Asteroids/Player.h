@@ -13,6 +13,14 @@ public:
     void Update(sf::RenderWindow& window);
     void Render(sf::RenderWindow& window);
 
+    // Player Movement
+    void MoveForward(float deltaTime);
+    void MoveBackward(float deltaTime);
+    void MoveLeft(float deltaTime);
+    void MoveRight(float deltaTime);
+
+    int Speed;
+
     // Getter functions
     int GetLives() const { return PlayerLives; }
     int GetScore() const { return PlayerScore; }

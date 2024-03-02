@@ -5,15 +5,11 @@ Player::Player()
 {
     PlayerLives = 3;
     PlayerScore = 0;
-
-    
+    Speed = 200;
 }
 
 void Player::Update(sf::RenderWindow& window)
 {
-    // Get the current mouse position
-    sf::Vector2f MousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-    PlayerSprite.setPosition(MousePosition.x, MousePosition.y); // Set the player position to the mouse position
     window.draw(PlayerSprite);
 }
 
@@ -23,6 +19,26 @@ void Player::Render(sf::RenderWindow& window)
     PlayerSprite.setTexture(PlayerTexture);
 
     window.draw(PlayerSprite);
+}
+
+void Player::MoveForward(float deltaTime)
+{
+    PlayerSprite.move(0.f, -Speed * deltaTime);
+}
+
+void Player::MoveBackward(float deltaTime)
+{
+    PlayerSprite.move(0.f, Speed * deltaTime);
+}
+
+void Player::MoveLeft(float deltaTime)
+{
+    PlayerSprite.move(-Speed * deltaTime, 0.f);
+}
+
+void Player::MoveRight(float deltaTime)
+{
+    PlayerSprite.move(Speed * deltaTime, 0.f);
 }
 
 
