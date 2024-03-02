@@ -62,11 +62,16 @@ int main()
         Asteroid.rotate(Rotation * dt.asSeconds());
         window.draw(Asteroid);
 
-        // Positiona nd size of text
-        sf::Vector2f textPosition = { 100.f, 700.f };
-        unsigned int textSize = 36; // Set your desired size
+        // Lives Text position and size 
+        sf::Vector2f LivesTextPosition = { 10.f, 10.f };
+        unsigned int LivesTextSize = 24; // Set your desired size
 
-        displayText(window, "Lives: ", sf::Color::Red, textPosition, textSize);
+        // Score Text position and size 
+        sf::Vector2f ScoreTextPosition = { 10.f, 50.f };
+        unsigned int ScoreTextSize = 24; // Set your desired size
+
+        displayText(window, "Lives: ", sf::Color::Red, LivesTextPosition, LivesTextSize);
+        displayText(window, "Score: ", sf::Color::Red, ScoreTextPosition, ScoreTextSize);
        
 
         //-----------------------------------------------------------------------------------
