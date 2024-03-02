@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "main.h"
+#include <iostream>
 
 //@TODO - Spawn player ship in the centre of the screen
 //@TODO - Display score and number of lives (score is 0 and lives is 3 by default)
@@ -11,6 +12,8 @@
 //@TODO - Player death (Game Over)
 //@TODO - Bullet collision and player score and lives update
 //@TODO - Asteriod splitting (Large -> Medium -> Small)
+
+#include <SFML/Graphics.hpp>
 
 int main()
 {
@@ -59,6 +62,7 @@ int main()
         Asteroid.rotate(Rotation * dt.asSeconds());
         window.draw(Asteroid);
 
+       
         displayText(window, "Hello", sf::Color::Red);
 
         //-----------------------------------------------------------------------------------
@@ -73,10 +77,11 @@ void displayText(sf::RenderWindow& window, const std::string& text, const sf::Co
 {
     sf::Text sfmlText;
 
-   // Use the ystem font
+    // Use the ystem font
     sf::Font font;
-    if (!font.loadFromFile("arial.ttf")) {
-        // if font not valid
+    if (!font.loadFromFile("Assets/arial.ttf")) {
+        
+        std::cout << "error loading font";
     }
 
     // Set the values of the text, font, text and colour
@@ -84,9 +89,12 @@ void displayText(sf::RenderWindow& window, const std::string& text, const sf::Co
     sfmlText.setString(text);
     sfmlText.setFillColor(fillColor);
 
+    sfmlText.setCharacterSize(24);
+
     // Set the position of the text to the centre of the screen
     sf::FloatRect textRect = sfmlText.getLocalBounds();
     sfmlText.setPosition((window.getSize().x - textRect.width) / 2, (window.getSize().y - textRect.height) / 2);
 
     window.draw(sfmlText);
 }
+
