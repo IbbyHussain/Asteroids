@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "main.h"
 #include <iostream>
+#include "Player.h"
 
 //@TODO - Spawn player ship in the centre of the screen
 //@TODO - Display score and number of lives (score is 0 and lives is 3 by default)
@@ -24,11 +25,18 @@ int main()
     sf::Texture PlayerTexture;
     sf::Texture AsteroidTexture;
 
-    PlayerTexture.loadFromFile("Assets/Ship.png");
+    //PlayerTexture.loadFromFile("Assets/Ship.png");
     AsteroidTexture.loadFromFile("Assets/Asteroid.png");
 
-    sf::Sprite Player;
-    Player.setTexture(PlayerTexture);
+    // Create a instance of the player 
+    Player* NewPlayer = new Player();
+    NewPlayer->SetLives(5);
+    NewPlayer->Render(window);
+    
+
+    //sf::Sprite Player;
+    //Player.setTexture(PlayerTexture);
+
     sf::Sprite Asteroid;
     Asteroid.setTexture(AsteroidTexture);
 
@@ -51,10 +59,16 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
+        // Update the player class
+        NewPlayer->Update(window);
+
+        
+        //window.draw(NewPlayer->GetPlayerSprite());
+
         // Player ship follows the mouse
-        sf::Vector2f MousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+       /* sf::Vector2f MousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
         Player.setPosition(MousePosition.x, MousePosition.y);
-        window.draw(Player);
+        window.draw(Player);*/
 
         // Asteroid spins in the center of the screen
         Asteroid.setPosition(400, 400);
@@ -64,14 +78,16 @@ int main()
 
         // Lives Text position and size 
         sf::Vector2f LivesTextPosition = { 10.f, 10.f };
-        unsigned int LivesTextSize = 24; // Set your desired size
+        unsigned int LivesTextSize = 24;
+        std::string LivesString = "Lives: " + std::to_string(NewPlayer->GetLives());
 
         // Score Text position and size 
         sf::Vector2f ScoreTextPosition = { 10.f, 50.f };
-        unsigned int ScoreTextSize = 24; // Set your desired size
+        unsigned int ScoreTextSize = 24;
+        std::string ScoreString = "Score: " + std::to_string(NewPlayer->GetScore());
 
-        displayText(window, "Lives: ", sf::Color::Red, LivesTextPosition, LivesTextSize);
-        displayText(window, "Score: ", sf::Color::Red, ScoreTextPosition, ScoreTextSize);
+        displayText(window, LivesString, sf::Color::Red, LivesTextPosition, LivesTextSize);
+        displayText(window, ScoreString, sf::Color::Red, ScoreTextPosition, ScoreTextSize);
        
 
         //-----------------------------------------------------------------------------------
@@ -90,7 +106,7 @@ void displayText(sf::RenderWindow& window, const std::string& text, const sf::Co
     sf::Font font;
     if (!font.loadFromFile("Assets/arial.ttf")) {
         std::cout << "Error loading font" << std::endl;
-        return; // Exit the function if the font cannot be loaded
+        return;
     }
 
     // Set the values of the text
