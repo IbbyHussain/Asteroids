@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "main.h"
 
 //@TODO - Spawn player ship in the centre of the screen
 //@TODO - Display score and number of lives (score is 0 and lives is 3 by default)
@@ -58,10 +59,34 @@ int main()
         Asteroid.rotate(Rotation * dt.asSeconds());
         window.draw(Asteroid);
 
+        displayText(window, "Hello", sf::Color::Red);
+
         //-----------------------------------------------------------------------------------
         // Display the updated game state
         window.display();
     }
 
     return 0;
+}
+
+void displayText(sf::RenderWindow& window, const std::string& text, const sf::Color& fillColor)
+{
+    sf::Text sfmlText;
+
+   // Use the ystem font
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        // if font not valid
+    }
+
+    // Set the values of the text, font, text and colour
+    sfmlText.setFont(font);
+    sfmlText.setString(text);
+    sfmlText.setFillColor(fillColor);
+
+    // Set the position of the text to the centre of the screen
+    sf::FloatRect textRect = sfmlText.getLocalBounds();
+    sfmlText.setPosition((window.getSize().x - textRect.width) / 2, (window.getSize().y - textRect.height) / 2);
+
+    window.draw(sfmlText);
 }
