@@ -70,7 +70,7 @@ int main()
             NewPlayer->MoveRight(dt.asSeconds());
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            NewPlayer->SpawnProjectile();
+            NewPlayer->SpawnProjectile(dt.asSeconds());
         }
 
         // Update the player sprite and the projectiles

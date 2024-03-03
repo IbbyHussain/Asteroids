@@ -6,6 +6,7 @@ Player::Player()
     PlayerLives = 3;
     PlayerScore = 0;
     Speed = 200;
+    ShootCooldown = 0.0f; // Initial cooldown needs to be 0
 }
 
 void Player::Update(sf::RenderWindow& window)
@@ -44,10 +45,21 @@ void Player::MoveRight(float deltaTime)
 
 #pragma region Projectiles
 
-void Player::SpawnProjectile()
+void Player::SpawnProjectile(float deltaTime)
 {
-    // Spawn projectile and add to array
-    ProjectilesArray.emplace_back(PlayerSprite.getPosition().x, PlayerSprite.getPosition().y);
+    // Ensures player can only shoot a projectile once every 0.15 seconds
+    if (TimeSinceLastShot >= ShootCooldown) 
+    {
+        // Spawn projectile and add to array
+        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x, PlayerSprite.getPosition().y);
+
+        //Reset timer
+        TimeSinceLastShot = 0.0f; 
+        ShootCooldown = 0.15f;
+    }
+
+    // Update the time since the last shot
+    TimeSinceLastShot += deltaTime;
 }
 
 void Player::RenderProjectiles(sf::RenderWindow& window)

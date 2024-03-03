@@ -19,7 +19,7 @@ public:
     void MoveLeft(float deltaTime);
     void MoveRight(float deltaTime);
 
-    void SpawnProjectile();
+    void SpawnProjectile(float deltaTime);
 
     // Updates the projectiles that the player has shot
     void UpdateProjectiles(sf::RenderWindow& window, float deltaTime);
@@ -47,5 +47,11 @@ private:
 
     // Array of all active projectiles
     std::vector<Projectile> ProjectilesArray;
+
+    // Time between each shot
+    float ShootCooldown; 
+
+    // Time since last projectile shot
+    float TimeSinceLastShot;
 
 };
