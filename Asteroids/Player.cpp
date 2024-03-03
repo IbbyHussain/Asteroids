@@ -66,6 +66,12 @@ void Player::UpdateProjectiles(sf::RenderWindow& window, float deltaTime)
     {
         Projectile.Update(window, deltaTime);
     }
+
+    // Despawn projectiles that go off the screen 
+    ProjectilesArray.erase(std::remove_if(ProjectilesArray.begin(), ProjectilesArray.end(), [](const Projectile& projectile)
+        {
+            return projectile.GetProjectileSprite().getPosition().y < 0;
+        }), ProjectilesArray.end());
 }
 
 #pragma endregion
