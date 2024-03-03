@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Projectile.h"
 #include <SFML/Graphics.hpp>
 
 class Player 
@@ -19,7 +19,12 @@ public:
     void MoveLeft(float deltaTime);
     void MoveRight(float deltaTime);
 
-    int Speed;
+    void SpawnProjectile();
+
+    // Updates the projectiles that the player has shot
+    void UpdateProjectiles(sf::RenderWindow& window, float deltaTime);
+ 
+    void RenderProjectiles(sf::RenderWindow& window);
 
     // Getter functions
     int GetLives() const { return PlayerLives; }
@@ -32,10 +37,15 @@ public:
 
 private:
 
+    int Speed;
+
     int PlayerLives;
     int PlayerScore;
 
     sf::Texture PlayerTexture;
     sf::Sprite PlayerSprite;
+
+    // Array of all active projectiles
+    std::vector<Projectile> ProjectilesArray;
 
 };

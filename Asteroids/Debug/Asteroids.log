@@ -1,2 +1,5 @@
-﻿  Projectile.cpp
+﻿  Player.cpp
+  Projectile.cpp
+  main.cpp
+  Generating Code...
   Asteroids.vcxproj -> C:\Bigarn\Asteroids_Git\Asteroids\Debug\Asteroids.exe

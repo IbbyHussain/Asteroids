@@ -10,14 +10,13 @@ Projectile::Projectile(float PositionX, float PositionY)
 void Projectile::Update(sf::RenderWindow& window, float deltaTime)
 {
     ProjectileSprite.move(0.0f, -Speed * deltaTime);
-	window.draw(ProjectileSprite);
+    window.draw(ProjectileSprite);
 }
 
 void Projectile::Render(sf::RenderWindow& window)
 {
     ProjectileTexture.loadFromFile("Assets/Ship.png");
     ProjectileSprite.setTexture(ProjectileTexture);
-    ProjectileSprite.setPosition(400, 400);
-
     window.draw(ProjectileSprite);
 }
+

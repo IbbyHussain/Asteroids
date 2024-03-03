@@ -34,8 +34,8 @@ int main()
     NewPlayer->Render(window);
 
     // Test projectile
-    Projectile* newProjectile = new Projectile(500, 500);
-    newProjectile->Render(window);
+    //Projectile* newProjectile = new Projectile(500, 500);
+    //newProjectile->Render(window);
 
     while (window.isOpen())
     {
@@ -56,10 +56,6 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
-        // Update the player class
-        NewPlayer->Update(window);
-        newProjectile->Update(window, dt.asSeconds());
-
         // Handle player movement inputs, using W,A,S,D
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             NewPlayer->MoveForward(dt.asSeconds());
@@ -73,6 +69,14 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             NewPlayer->MoveRight(dt.asSeconds());
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            NewPlayer->SpawnProjectile();
+        }
+
+        // Update the player sprite and the projectiles
+        NewPlayer->Update(window);
+        NewPlayer->UpdateProjectiles(window, dt.asSeconds());
+        NewPlayer->RenderProjectiles(window);
 
         // Asteroid spins in the center of the screen
         Asteroid.setPosition(400, 400);
