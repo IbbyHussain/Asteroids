@@ -114,7 +114,14 @@ void Player::DecreasePlayerLives()
     //Respawn
     PlayerSprite.setPosition(400, 400);
 
+    
     bGracePeriodActive = true;
+
+    std::cout << "activate grace period";
+    
+    
+    
+   
 
     // Reset the grace period timer
     GracePeriodTimer.restart();
@@ -123,9 +130,6 @@ void Player::DecreasePlayerLives()
     if(PlayerLives == 0)
     {
         PlayerLives = 0;
-
-        // Game over
-        
     }
 }
 
@@ -153,4 +157,10 @@ void Player::SetLives(int Lives)
 
 void Player::SetScore(int Score) {
     PlayerScore = Score;
+}
+
+void Player::SetGracePeriod(bool bIsActive)
+{
+    bGracePeriodActive = bIsActive;
+    GracePeriodTimer.restart();
 }

@@ -52,6 +52,7 @@ public:
     // Setter functions
     void SetLives(int Lives);
     void SetScore(int Score);
+    void SetGracePeriod(bool bIsActive);
 
 private:
 

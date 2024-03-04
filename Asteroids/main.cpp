@@ -9,7 +9,6 @@
 // The player can shoot bullets, that fire forwardin the direction the ship is facing
 
 
-// After colliison with asteroid player has grace period where asteroid cannot collide with them
 // Once a player loses all their lives the game ends
 // When an asteroid is destroyed it splits into two smaller ones.
 
@@ -28,9 +27,12 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 800), "LHG Code Exercise");
     sf::Clock GameClock;
 
+    
+
     // Create a instance of the player 
     Player* NewPlayer = new Player();
-    NewPlayer->SetLives(3);
+    NewPlayer->SetLives(2);
+    NewPlayer->SetScore(0);
     NewPlayer->Render(window);
 
     // Store Asteroids in an array
@@ -47,7 +49,7 @@ int main()
         Asteroids[i]->Render(window);
     }
 
-    while (window.isOpen())
+    while (window.isOpen() )
     {
         // Get the delta time for the game update
         sf::Time dt = GameClock.restart();
@@ -66,144 +68,188 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
-        // Grace period timer 
-        if (NewPlayer->bIsGracePeriodActive()) 
+        if(!bGameOver)
         {
-            // Check if the grace period has finished (3 seconds)
-            if (NewPlayer->GetGracePeriodElapsedTime() >= sf::seconds(3.0f)) 
+            // Grace period timer 
+            if (NewPlayer->bIsGracePeriodActive())
             {
-                // Stops the grace period
-                NewPlayer->DisableGracePeriod();
-
-                //std::cout << "grace period over";
-            }
-        }
-
-        // Collision -> Projectile and Asteroids
-        auto& projectiles = NewPlayer->GetProjectilesArray();
-
-        // Loop over asteroids and projectiles
-        for (auto& projectile : projectiles)
-        {
-            for (int i = 0; i < CurrentNumOfAsteroids; ++i)
-            {
-                auto* asteroid = Asteroids[i];
-
-                // Check colliison
-                if (asteroid != nullptr && projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                // Check if the grace period has finished (3 seconds)
+                if (NewPlayer->GetGracePeriodElapsedTime() >= sf::seconds(3.0f))
                 {
-                    // Destroy the projectile by removing from array if collided with asteroid
-                    auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p)
+                    // Stops the grace period
+                    NewPlayer->DisableGracePeriod();
+
+                    std::cout << "grace period over";
+                }
+            }
+
+            // Collision -> Projectile and Asteroids
+            auto& projectiles = NewPlayer->GetProjectilesArray();
+
+            // Loop over asteroids and projectiles
+            for (auto& projectile : projectiles)
+            {
+                for (int i = 0; i < CurrentNumOfAsteroids; ++i)
+                {
+                    auto* asteroid = Asteroids[i];
+
+                    // Check colliison
+                    if (asteroid != nullptr && projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                    {
+                        // Destroy the projectile by removing from array if collided with asteroid
+                        auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p)
+                            {
+                                return &projectile == &p;
+                            });
+
+                        projectiles.erase(projectileIt, projectiles.end());
+
+                        // Destroy the asteroid
+                        delete Asteroids[i];
+                        Asteroids[i] = nullptr;
+
+                        // Shift elements in the array as we just removed an element
+                        for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
                         {
-                            return &projectile == &p;
-                        });
+                            Asteroids[j] = Asteroids[j + 1];
+                        }
 
-                    projectiles.erase(projectileIt, projectiles.end());
+                        // Set asteroids to null
+                        Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
 
-                    // Destroy the asteroid
-                    delete Asteroids[i];
-                    Asteroids[i] = nullptr;
+                        // Decrease the number of asteroids
+                        --CurrentNumOfAsteroids;
 
-                    // Shift elements in the array as we just removed an element
-                    for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
-                    {
-                        Asteroids[j] = Asteroids[j + 1];
+                        // Update players score
+                        NewPlayer->IncreaseScore(10);
+                        UpdatePlayerScoreText(window, NewPlayer);
+
+
+                        // Break out of the loop 
+                        break;
                     }
-
-                    // Set asteroids to null
-                    Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
-
-                    // Decrease the number of asteroids
-                    --CurrentNumOfAsteroids;
-
-                    // Update players score
-                    NewPlayer->IncreaseScore(10);
-                    UpdatePlayerScoreText(window, NewPlayer);
-     
-
-                    // Break out of the loop 
-                    break;
                 }
             }
-        }
 
-        // Collision -> Player and Asteroids
+            // Collision -> Player and Asteroids
 
-        // Can only collide with asteroids if grace period is not active
-        if(!NewPlayer->bIsGracePeriodActive())
-        {
-            for (int i = 0; i < CurrentNumOfAsteroids; ++i)
+            // Can only collide with asteroids if grace period is not active
+            if (!NewPlayer->bIsGracePeriodActive())
             {
-                auto* asteroid = Asteroids[i];
-
-                // Check colliison
-                if (asteroid != nullptr && NewPlayer->GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                for (int i = 0; i < CurrentNumOfAsteroids; ++i)
                 {
-                    // will also handle respawning
-                    NewPlayer->DecreasePlayerLives();
+                    auto* asteroid = Asteroids[i];
 
-                    // delete the hit asteroid
-                    delete Asteroids[i];
-                    Asteroids[i] = nullptr;
-
-                    // Shift elements in the array as we just removed an element
-                    for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
+                    // Check colliison
+                    if (asteroid != nullptr && NewPlayer->GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                     {
-                        Asteroids[j] = Asteroids[j + 1];
+                        // will also handle respawning
+                        NewPlayer->DecreasePlayerLives();
+
+
+                        // delete the hit asteroid
+                        delete Asteroids[i];
+                        Asteroids[i] = nullptr;
+
+                        // Shift elements in the array as we just removed an element
+                        for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
+                        {
+                            Asteroids[j] = Asteroids[j + 1];
+                        }
+
+                        // Set asteroids to null
+                        Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
+
+                        // Decrease the number of asteroids
+                        --CurrentNumOfAsteroids;
+
+                        // Break out of the loop 
+                        break;
                     }
-
-                    // Set asteroids to null
-                    Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
-
-                    // Decrease the number of asteroids
-                    --CurrentNumOfAsteroids;
-
-                    // Break out of the loop 
-                    break;
                 }
             }
-        }
-        
 
-        // Handle player movement inputs, using W,A,S,D
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
-        {
-            NewPlayer->MoveForward(dt.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
-        {
-            NewPlayer->MoveBackward(dt.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
-        {
-            NewPlayer->MoveLeft(dt.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
-        {
-            NewPlayer->MoveRight(dt.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
-        {
-            NewPlayer->SpawnProjectile(dt.asSeconds());
-        }
 
-        // Update the player sprite and the projectiles
-        NewPlayer->Update(window);
-        NewPlayer->UpdateProjectiles(window, dt.asSeconds());
-        NewPlayer->RenderProjectiles(window);
-
-        // Update all asteroids
-        for (int i = 0; i < NumOfAsteroids; ++i)
-        {
-            if (Asteroids[i] != nullptr) 
+            // Handle player movement inputs, using W,A,S,D
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                Asteroids[i]->Update(window, dt.asSeconds());
+                NewPlayer->MoveForward(dt.asSeconds());
             }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                NewPlayer->MoveBackward(dt.asSeconds());
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                NewPlayer->MoveLeft(dt.asSeconds());
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                NewPlayer->MoveRight(dt.asSeconds());
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                NewPlayer->SpawnProjectile(dt.asSeconds());
+            }
+
+            // Update the player sprite and the projectiles
+            NewPlayer->Update(window);
+            NewPlayer->UpdateProjectiles(window, dt.asSeconds());
+            NewPlayer->RenderProjectiles(window);
+
+            // Update all asteroids
+            for (int i = 0; i < NumOfAsteroids; ++i)
+            {
+                if (Asteroids[i] != nullptr)
+                {
+                    Asteroids[i]->Update(window, dt.asSeconds());
+                }
+            }
+
+            // Set game over
+            if (NewPlayer->GetLives() <= 0)
+            {
+                //std::cout << "PLAYER HAS DIED";
+                bGameOver = true;
+
+                for (int i = 0; i < NumOfAsteroids; ++i)
+                {
+                    delete Asteroids[i];
+                    Asteroids[i] = nullptr;
+                }
+            }
+
+
+
+            UpdatePlayerLivesText(window, NewPlayer);
+            UpdatePlayerScoreText(window, NewPlayer);
         }
 
-       
-        UpdatePlayerLivesText(window, NewPlayer);
-        UpdatePlayerScoreText(window, NewPlayer);
+        // If game over
+        if(bGameOver)
+        {
+           // GAME OVER Text position and size 
+           sf::Vector2f GameOverTextPosition = { 300.f, 340.f };
+           unsigned int GameOverTextSize = 40;
+           displayText(window, "GAME OVER", sf::Color::Red, GameOverTextPosition, GameOverTextSize);
+
+           //if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+           //{
+           //    // Reset game state, restart the game
+           //    bGameOver = false;
+
+           //    NewPlayer->SetLives(3);
+           //    NewPlayer->SetScore(0);
+           //    NewPlayer->DisableGracePeriod();
+
+           //    for (int i = 0; i < NumOfAsteroids; ++i) 
+           //    {
+           //        Asteroids[i] = new Asteroid();
+           //        Asteroids[i]->Render(window);
+           //    }
+           //}
+        }
+
 
         //-----------------------------------------------------------------------------------
         // Display the updated game state

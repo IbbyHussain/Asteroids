@@ -10,3 +10,5 @@ void displayText(sf::RenderWindow& window, const std::string& text, const sf::Co
 void UpdatePlayerLivesText(sf::RenderWindow& window, Player* PlayerToUpdate);
 
 void UpdatePlayerScoreText(sf::RenderWindow& window, Player* PlayerToUpdate);
+
+bool bGameOver = false;

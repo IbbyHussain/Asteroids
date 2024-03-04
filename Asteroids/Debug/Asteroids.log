@@ -1,5 +1,3 @@
-﻿  Player.cpp
-  main.cpp
-C:\Bigarn\Asteroids_Git\Asteroids\Asteroids\main.cpp(26,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+﻿  main.cpp
+C:\Bigarn\Asteroids_Git\Asteroids\Asteroids\main.cpp(25,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Asteroids.vcxproj -> C:\Bigarn\Asteroids_Git\Asteroids\Debug\Asteroids.exe
