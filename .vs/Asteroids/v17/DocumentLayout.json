@@ -50,8 +50,7 @@
               "RelativeToolTip": "Asteroids\\Projectile.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-04T14:24:55.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-04T14:24:55.708Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "Asteroids\\Asteriod.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-03T01:07:41.84Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-03T01:07:41.84Z"
             },
             {
               "$type": "Document",
@@ -74,7 +72,7 @@
               "RelativeDocumentMoniker": "Asteroids\\Asteriod.cpp",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Asteriod.cpp",
               "RelativeToolTip": "Asteroids\\Asteriod.cpp",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEsAAAAEAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAAqwFEAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-03T01:07:51.464Z",
               "EditorCaption": ""
@@ -101,8 +99,7 @@
               "RelativeToolTip": "Asteroids\\Player.cpp",
               "ViewState": "AQIAABgAAAAAAAAAAAAAAC8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T22:58:51.081Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T22:58:51.081Z"
             },
             {
               "$type": "Document",
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Asteroids\\main.cpp",
               "ViewState": "AQIAAEoAAAAAAAAAAAAIwHQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T12:44:33.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T12:44:33.974Z"
             }
           ]
         }

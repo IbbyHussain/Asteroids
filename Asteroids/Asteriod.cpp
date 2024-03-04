@@ -49,18 +49,37 @@ void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
 
 void Asteroid::SetAsteroidPosition()
 {
-    // Set asteriod position off screen with random x and y coord
-    float SpawnX = float(rand() % 100); // Convert to float
-    float SpawnY = -float(rand() % 100); 
+
+    // Generate a random number (0 to 3) to determine the spawn side
+    int SpawnSide = rand() % 4; // 0: top, 1: left, 2: right, 3: bottom
+
+    float SpawnX, SpawnY;
+
+    // Set asteroid position dependin on the spawn side
+    switch (SpawnSide) {
+    case 0: // Top side
+        SpawnX = static_cast<float>(rand() % (800 - 10));
+        SpawnY = -static_cast<float>(rand() % (100));
+        break;
+    case 1: // Left side
+        SpawnX = -static_cast<float>(rand() % (100));
+        SpawnY = static_cast<float>(rand() % (800 - 10));
+        break;
+    case 2: // Right side
+        SpawnX = 800 + static_cast<float>(rand() % (100));
+        SpawnY = static_cast<float>(rand() % (800 - 10));
+        break;
+    case 3: // Bottom side
+        SpawnX = static_cast<float>(rand() % (800 - 10));
+        SpawnY = 800 + static_cast<float>(rand() % (100));
+        break;
+    }
 
     AsteroidSprite.setPosition(SpawnX, SpawnY);
 
-    std::cout << SpawnX;
-    std::cout << SpawnY;
-
-    // Set a random direction for the asteroid to move
-    Direction.x = float(rand() % 5 - 2); 
-    Direction.y = float(rand() % 5 - 2); 
+    // Set a random direction for the asteroid
+    Direction.x = static_cast<float>(rand() % 5 - 2); 
+    Direction.y = static_cast<float>(rand() % 5 - 2);
 
     // Normalise so constant velocity
     float length = std::sqrt(Direction.x * Direction.x + Direction.y * Direction.y);
@@ -69,10 +88,6 @@ void Asteroid::SetAsteroidPosition()
         Direction.y /= length;
     }
 
-    std::cout << Direction.x;
-    std::cout << Direction.y;
-    
-   
     
 
     
