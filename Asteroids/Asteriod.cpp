@@ -13,10 +13,39 @@ Asteroid::Asteroid()
 
 void Asteroid::Update(sf::RenderWindow& window, float deltaTime)
 {
+    // Asteriod moves withdirection and speed
     AsteroidSprite.move(Direction.x * Speed * deltaTime, Direction.y * Speed * deltaTime);
-    //AsteroidSprite.move(1 * Speed * deltaTime, 1 * Speed * deltaTime);
 
-	window.draw(AsteroidSprite);
+    // Get Current position
+    sf::Vector2f AsteroidPosition = AsteroidSprite.getPosition();
+
+    // if the Asteroid has gone off the screen
+    // Wrap to the right side
+    if (AsteroidPosition.x < 0) 
+    {
+        AsteroidPosition.x = 800; 
+    }
+
+    // Wrap to the left side
+    else if (AsteroidPosition.x > 800) 
+    {
+        AsteroidPosition.x = 0;   
+    }
+
+    // Wrap to the bottom
+    if (AsteroidPosition.y < 0) 
+    {
+        AsteroidPosition.y = 800; 
+    }
+
+    // Wrap to the top
+    else if (AsteroidPosition.y > 800) 
+    {
+        AsteroidPosition.y = 0;   
+    }
+
+    AsteroidSprite.setPosition(AsteroidPosition);
+    window.draw(AsteroidSprite);
 }
 
 void Asteroid::Render(sf::RenderWindow& window)
@@ -88,9 +117,5 @@ void Asteroid::SetAsteroidPosition()
         Direction.x /= Length;
         Direction.y /= Length;
     }
-
-    
-
-    
 }
 
