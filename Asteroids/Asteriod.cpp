@@ -49,43 +49,44 @@ void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
 
 void Asteroid::SetAsteroidPosition()
 {
-
     // Generate a random number (0 to 3) to determine the spawn side
-    int SpawnSide = rand() % 4; // 0: top, 1: left, 2: right, 3: bottom
+    int SpawnSide = rand() % 4; 
 
-    float SpawnX, SpawnY;
+    float SpawnX = 0.0f;
+    float SpawnY = 0.0f;
 
-    // Set asteroid position dependin on the spawn side
-    switch (SpawnSide) {
-    case 0: // Top side
-        SpawnX = static_cast<float>(rand() % (800 - 10));
-        SpawnY = -static_cast<float>(rand() % (100));
-        break;
-    case 1: // Left side
-        SpawnX = -static_cast<float>(rand() % (100));
-        SpawnY = static_cast<float>(rand() % (800 - 10));
-        break;
-    case 2: // Right side
-        SpawnX = 800 + static_cast<float>(rand() % (100));
-        SpawnY = static_cast<float>(rand() % (800 - 10));
-        break;
-    case 3: // Bottom side
-        SpawnX = static_cast<float>(rand() % (800 - 10));
-        SpawnY = 800 + static_cast<float>(rand() % (100));
-        break;
+    // Set asteroid position depending on the spawn side
+    switch (SpawnSide) 
+    {
+        case 0: // Top side
+            SpawnX = static_cast<float>(rand() % 800); // Within the width of the screen
+            SpawnY = -static_cast<float>(rand() % 100); // Above the screen
+            break;
+        case 1: // Left side
+            SpawnX = -static_cast<float>(rand() % 100); 
+            SpawnY = static_cast<float>(rand() % 800); 
+            break;
+        case 2: // Right side
+            SpawnX = 800 + static_cast<float>(rand() % 100); 
+            SpawnY = static_cast<float>(rand() % 800); 
+            break;
+        case 3: // Bottom side
+            SpawnX = static_cast<float>(rand() % 800); 
+            SpawnY = 800 + static_cast<float>(rand() % 100);
+            break;
     }
 
     AsteroidSprite.setPosition(SpawnX, SpawnY);
 
-    // Set a random direction for the asteroid
-    Direction.x = static_cast<float>(rand() % 5 - 2); 
-    Direction.y = static_cast<float>(rand() % 5 - 2);
+    // Direction towards the center of the screen, Screen is 800x800
+    sf::Vector2f CentreOfScreen(400.0f, 400.0f);  
+    Direction = CentreOfScreen - AsteroidSprite.getPosition();
 
     // Normalise so constant velocity
-    float length = std::sqrt(Direction.x * Direction.x + Direction.y * Direction.y);
-    if (length != 0) {
-        Direction.x /= length;
-        Direction.y /= length;
+    float Length = std::sqrt(Direction.x * Direction.x + Direction.y * Direction.y);
+    if (Length != 0) {
+        Direction.x /= Length;
+        Direction.y /= Length;
     }
 
     
