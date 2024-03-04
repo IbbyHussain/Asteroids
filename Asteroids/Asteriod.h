@@ -24,8 +24,11 @@ public:
 
     void SetAsteroidPosition();
 
-    //Getter functions
+    // Getter functions
     sf::Sprite GetAsteroidSprite() const { return AsteroidSprite; }
+
+    // Get the sprites bounding box
+    sf::FloatRect GetBoundingBox() const { return AsteroidSprite.getGlobalBounds(); }
 
 private:
 

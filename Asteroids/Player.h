@@ -28,8 +28,12 @@ public:
 
     // Getter functions
     int GetLives() const { return PlayerLives; }
+
     int GetScore() const { return PlayerScore; }
+
     sf::Sprite GetPlayerSprite() const { return PlayerSprite; }
+
+    std::vector<Projectile> GetProjectilesArray() const { return ProjectilesArray; }
 
     // Setter functions
     void SetLives(int Lives);

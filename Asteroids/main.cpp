@@ -62,6 +62,19 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
+        // Collision -> Projectile and Asteroids
+        for (auto& projectile : NewPlayer->GetProjectilesArray())
+        {
+            for (auto& asteroid : Asteroids)
+            {
+                if (projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                {
+                    std::cout << "Collision";
+                   
+                }
+            }
+        }
+
         // Handle player movement inputs, using W,A,S,D
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             NewPlayer->MoveForward(dt.asSeconds());

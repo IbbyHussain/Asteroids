@@ -15,6 +15,9 @@ public:
     // Getter functions
     sf::Sprite GetProjectileSprite() const { return ProjectileSprite; }
 
+    // Get the sprites bounding box
+    sf::FloatRect GetBoundingBox() const { return ProjectileSprite.getGlobalBounds(); }
+
 private:
 
     sf::Texture ProjectileTexture;
