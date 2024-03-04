@@ -28,7 +28,7 @@ public:
 
     void IncreaseScore(int IncreaseAmount);
 
-    void DecreasePlayerLives();
+    void DecreasePlayerLives(float deltaTime);
 
     // Getter functions
     int GetLives() const { return PlayerLives; }
@@ -66,6 +66,10 @@ private:
 
     // Time since last projectile shot
     float TimeSinceLastShot;
+
+    float TimeSinceLastGracePeriod;
+
+    float GracePeriodCooldown;
 
     bool bGracePeriodActive;
 };
