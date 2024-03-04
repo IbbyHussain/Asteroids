@@ -7,6 +7,8 @@ Player::Player()
     PlayerScore = 0;
     Speed = 200;
     ShootCooldown = 0.0f; // Initial cooldown needs to be 0
+
+    bGracePeriodActive = false;
 }
 
 void Player::Update(sf::RenderWindow& window)
@@ -103,6 +105,25 @@ void Player::RenderProjectiles(sf::RenderWindow& window)
 void Player::IncreaseScore(int IncreaseAmount)
 {
     PlayerScore += IncreaseAmount;
+}
+
+void Player::DecreasePlayerLives()
+{
+    PlayerLives--;
+
+    //Respawn
+    PlayerSprite.setPosition(400, 400);
+
+    bGracePeriodActive = true;
+
+    // Player has died
+    if(PlayerLives == 0)
+    {
+        PlayerLives = 0;
+
+        // Game over
+        
+    }
 }
 
 void Player::UpdateProjectiles(sf::RenderWindow& window, float deltaTime)

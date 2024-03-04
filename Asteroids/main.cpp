@@ -8,7 +8,7 @@
 // The player can move the ship forwards, and turn left and righ
 // The player can shoot bullets, that fire forwardin the direction the ship is facing
 
-// If the player collides with an asteroid they lose a life and respawn in the center of the screen.
+
 // After colliison with asteroid player has grace period where asteroid cannot collide with them
 // Once a player loses all their lives the game ends
 // When an asteroid is destroyed it splits into two smaller ones.
@@ -34,7 +34,7 @@ int main()
     NewPlayer->Render(window);
 
     // Store Asteroids in an array
-    const int NumOfAsteroids = 1;
+    const int NumOfAsteroids = 2;
 
     // As asteroids are destroyed and respawned need to keep track of curretn number
     int CurrentNumOfAsteroids = NumOfAsteroids;
@@ -97,10 +97,10 @@ int main()
                         Asteroids[j] = Asteroids[j + 1];
                     }
 
-                    // Nullify the last element to avoid accessing a dangling pointer
+                    // Set asteroids to null
                     Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
 
-                    // Decrease the count of asteroids
+                    // Decrease the number of asteroids
                     --CurrentNumOfAsteroids;
 
                     // Update players score
@@ -113,6 +113,44 @@ int main()
                 }
             }
         }
+
+        // Collision -> Player and Asteroids
+
+        // Can only collide with asteroids if grace period is not active
+        if(!NewPlayer->bIsGracePeriodActive())
+        {
+            for (int i = 0; i < CurrentNumOfAsteroids; ++i)
+            {
+                auto* asteroid = Asteroids[i];
+
+                // Check colliison
+                if (asteroid != nullptr && NewPlayer->GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                {
+                    // will also handle respawning
+                    NewPlayer->DecreasePlayerLives();
+
+                    // delete the hit asteroid
+                    delete Asteroids[i];
+                    Asteroids[i] = nullptr;
+
+                    // Shift elements in the array as we just removed an element
+                    for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
+                    {
+                        Asteroids[j] = Asteroids[j + 1];
+                    }
+
+                    // Set asteroids to null
+                    Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
+
+                    // Decrease the number of asteroids
+                    --CurrentNumOfAsteroids;
+
+                    // Break out of the loop 
+                    break;
+                }
+            }
+        }
+        
 
         // Handle player movement inputs, using W,A,S,D
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 

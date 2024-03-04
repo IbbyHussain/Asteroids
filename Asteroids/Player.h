@@ -28,6 +28,8 @@ public:
 
     void IncreaseScore(int IncreaseAmount);
 
+    void DecreasePlayerLives();
+
     // Getter functions
     int GetLives() const { return PlayerLives; }
 
@@ -36,6 +38,11 @@ public:
     sf::Sprite GetPlayerSprite() const { return PlayerSprite; }
 
     std::vector<Projectile>& GetProjectilesArray() { return ProjectilesArray; }
+
+    // Get the sprites bounding box
+    sf::FloatRect GetBoundingBox() const { return PlayerSprite.getGlobalBounds(); }
+
+    bool bIsGracePeriodActive() const { return bGracePeriodActive; }
 
     // Setter functions
     void SetLives(int Lives);
@@ -60,4 +67,5 @@ private:
     // Time since last projectile shot
     float TimeSinceLastShot;
 
+    bool bGracePeriodActive;
 };
