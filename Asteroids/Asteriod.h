@@ -24,12 +24,6 @@ public:
 
     void SetAsteroidPosition();
 
-    AsteroidSize GetSize() const { return Size; }
-
-    std::vector<Asteroid*> Split(sf::RenderWindow& window);
-
-    //void Split(Asteroid* asteroids[], int& currentNumOfAsteroids);
-
     // Getter functions
     sf::Sprite GetAsteroidSprite() const { return AsteroidSprite; }
 
@@ -46,8 +40,6 @@ private:
     sf::Sprite AsteroidSprite;
 
     sf::Vector2f Direction;
-
-
 
 
 

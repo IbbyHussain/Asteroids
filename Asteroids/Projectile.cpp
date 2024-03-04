@@ -2,7 +2,7 @@
 
 Projectile::Projectile(float PositionX, float PositionY)
 {
-    Speed = 250;
+    Speed = 150;
     ProjectileSprite.setPosition(PositionX, PositionY);
     ProjectileSprite.setScale(0.5f, 0.5f);
 }
