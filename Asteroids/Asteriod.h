@@ -17,12 +17,16 @@ public:
     // A basic Constructor
     Asteroid();
 
+    Asteroid(AsteroidSize newSize);
+
     void Update(sf::RenderWindow& window, float deltaTime);
     void Render(sf::RenderWindow& window);
 
     void UpdateAsteroidSize(AsteroidSize NewSize);
 
     void SetAsteroidPosition();
+
+    void Split(std::vector<Asteroid*>& asteroids);
 
     // Getter functions
     sf::Sprite GetAsteroidSprite() const { return AsteroidSprite; }

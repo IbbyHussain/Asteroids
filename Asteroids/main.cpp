@@ -7,15 +7,9 @@
 #include <algorithm>
 // The player can move the ship forwards, and turn left and righ
 // The player can shoot bullets, that fire forwardin the direction the ship is facing
-
-
-// Once a player loses all their lives the game ends
 // When an asteroid is destroyed it splits into two smaller ones.
 
 //@TODO - Shoot projectiles in player direction
-//@TODO - Player collision and grace period
-//@TODO - Player death (Game Over)
-//@TODO - Bullet collision and player score and lives update
 //@TODO - Asteriod splitting (Large -> Medium -> Small)
 
 #include <SFML/Graphics.hpp>
@@ -45,7 +39,7 @@ int main()
     // Spawn 5 asteroids
     for (int i = 0; i < NumOfAsteroids; ++i) 
     {
-        Asteroids[i] = new Asteroid();
+        Asteroids[i] = new Asteroid(LARGE);
         Asteroids[i]->Render(window);
     }
 
@@ -84,18 +78,31 @@ int main()
             }
 
             // Collision -> Projectile and Asteroids
+            
+
+            std::vector<int> asteroidsToDelete;
             auto& projectiles = NewPlayer->GetProjectilesArray();
 
-            // Loop over asteroids and projectiles
+            // Loop over projectiles
             for (auto& projectile : projectiles)
             {
+                // Loop over asteroids
                 for (int i = 0; i < CurrentNumOfAsteroids; ++i)
                 {
                     auto* asteroid = Asteroids[i];
 
-                    // Check colliison
+                    // Check collision
                     if (asteroid != nullptr && projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                     {
+                        if (asteroid != nullptr)
+                        {
+                            std::vector<Asteroid*> asteroidsToSplit(Asteroids, Asteroids + 2);
+                            asteroid->Split(asteroidsToSplit);
+                        }
+
+                        // Mark the asteroid for deletion
+                        asteroidsToDelete.push_back(i);
+
                         // Destroy the projectile by removing from array if collided with asteroid
                         auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p)
                             {
@@ -104,31 +111,33 @@ int main()
 
                         projectiles.erase(projectileIt, projectiles.end());
 
-                        // Destroy the asteroid
-                        delete Asteroids[i];
-                        Asteroids[i] = nullptr;
-
-                        // Shift elements in the array as we just removed an element
-                        for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
-                        {
-                            Asteroids[j] = Asteroids[j + 1];
-                        }
-
-                        // Set asteroids to null
-                        Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
-
-                        // Decrease the number of asteroids
-                        --CurrentNumOfAsteroids;
-
-                        // Update players score
+                        // Update player's score
                         NewPlayer->IncreaseScore(10);
                         UpdatePlayerScoreText(window, NewPlayer);
 
-
-                        // Break out of the loop 
+                        // Break out of the loop
                         break;
                     }
                 }
+            }
+
+            // Delete asteroids marked for deletion
+            for (int index : asteroidsToDelete)
+            {
+                delete Asteroids[index];
+                Asteroids[index] = nullptr;
+
+                // Shift elements in the array as we just removed an element
+                for (int j = index; j < CurrentNumOfAsteroids - 1; ++j)
+                {
+                    Asteroids[j] = Asteroids[j + 1];
+                }
+
+                // Set the last element to null
+                Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
+
+                // Decrease the number of asteroids
+                --CurrentNumOfAsteroids;
             }
 
             // Collision -> Player and Asteroids
