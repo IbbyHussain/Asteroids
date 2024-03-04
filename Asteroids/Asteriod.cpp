@@ -2,18 +2,21 @@
 #include <iostream>
 #include <cstdlib>
 
-Asteroid::Asteroid(AsteroidSize NewSize)
+Asteroid::Asteroid(AsteroidSize size) : Size(size)
+
 {
     Speed = 150;
 
     SetAsteroidPosition();
 
-    UpdateAsteroidSize(NewSize);
+    UpdateAsteroidSize(size);
+
+    //std::cout << "Asteroid constructor called with size: " << static_cast<int>(size) << std::endl;
 }
 
 void Asteroid::Update(sf::RenderWindow& window, float deltaTime)
 {
-    
+
     // Asteriod moves withdirection and speed
     AsteroidSprite.move(Direction.x * Speed * deltaTime, Direction.y * Speed * deltaTime);
 
@@ -63,17 +66,17 @@ void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
     switch (NewSize) 
     {
     case SMALL:
-        std::cout << "The asteroid is small." << std::endl;
+        //std::cout << "The asteroid is small." << std::endl;
         AsteroidSprite.setScale(sf::Vector2f(1.0f, 1.0f));
         break;
 
     case MEDIUM:
-        std::cout << "The asteroid is medium." << std::endl;
+        //std::cout << "The asteroid is medium." << std::endl;
         AsteroidSprite.setScale(sf::Vector2f(1.5f, 1.5f));
         break;
 
     case LARGE:
-        std::cout << "The asteroid is large." << std::endl;
+        //std::cout << "The asteroid is large." << std::endl;
         AsteroidSprite.setScale(sf::Vector2f(2.0f, 2.0f));
         break;
 
@@ -122,4 +125,31 @@ void Asteroid::SetAsteroidPosition()
         Direction.y /= Length;
     }
 }
+
+std::vector<Asteroid*> Asteroid::Split(sf::RenderWindow& window)
+{
+    std::vector<Asteroid*> newAsteroids;
+
+    //std::cout << "Asteroid split! Current size: " << static_cast<int>(Size) << std::endl;
+
+    // Create new asteroids based on the current size
+    if (Size == AsteroidSize::LARGE)
+    {
+        // Split into two medium asteroids
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+    }
+
+    else if (Size == AsteroidSize::MEDIUM)
+    {
+        // Split into two small asteroids
+        newAsteroids.push_back(new Asteroid(SMALL));
+        newAsteroids.push_back(new Asteroid(SMALL));
+    }
+    
+
+    return newAsteroids;
+}
+
+
 
