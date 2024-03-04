@@ -33,7 +33,7 @@ public:
 
     sf::Sprite GetPlayerSprite() const { return PlayerSprite; }
 
-    std::vector<Projectile> GetProjectilesArray() const { return ProjectilesArray; }
+    std::vector<Projectile>& GetProjectilesArray() { return ProjectilesArray; }
 
     // Setter functions
     void SetLives(int Lives);

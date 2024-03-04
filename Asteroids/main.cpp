@@ -4,13 +4,14 @@
 #include "Player.h"
 #include "Projectile.h"
 #include "Asteriod.h"
-//The player can move the ship forwards, and turn left and righ
-//The player can shoot bullets, that fire forwardin the direction the ship is facing
-//If the player collides with an asteroid they lose a life and respawn in the center of the screen.
-//After colliison with asteroid player has grace period where asteroid cannot collide with them
-//Once a player loses all their lives the game ends
-//When a bullet collides with an asteroid, both are destroyed and the player earns some score
-//When an asteroid is destroyed it splits into two smaller ones.
+#include <algorithm>
+// The player can move the ship forwards, and turn left and righ
+// The player can shoot bullets, that fire forwardin the direction the ship is facing
+// If the player collides with an asteroid they lose a life and respawn in the center of the screen.
+// After colliison with asteroid player has grace period where asteroid cannot collide with them
+// Once a player loses all their lives the game ends
+// When a bullet collides with an asteroid, both are destroyed and the player earns some score
+// When an asteroid is destroyed it splits into two smaller ones.
 
 //@TODO - Shoot projectiles in player direction
 //@TODO - Player collision and grace period
@@ -62,33 +63,49 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
-        // Collision -> Projectile and Asteroids
-        for (auto& projectile : NewPlayer->GetProjectilesArray())
+        // Loop over asteroids and projectiles
+        auto& projectiles = NewPlayer->GetProjectilesArray();
+        for (auto& projectile : projectiles)
         {
-            for (auto& asteroid : Asteroids)
+            for (auto* asteroid : Asteroids)
             {
+                // Check colliison
                 if (projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                 {
-                    std::cout << "Collision";
                    
+
+                    // Destroy the projectile by removing from array if collided with asteroid
+                    auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p) 
+                        {
+                            return &projectile == &p;
+                        });
+
+                    projectiles.erase(projectileIt, projectiles.end());
+
+                    
                 }
             }
         }
 
         // Handle player movement inputs, using W,A,S,D
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
+        {
             NewPlayer->MoveForward(dt.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
+        {
             NewPlayer->MoveBackward(dt.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
+        {
             NewPlayer->MoveLeft(dt.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
+        {
             NewPlayer->MoveRight(dt.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
+        {
             NewPlayer->SpawnProjectile(dt.asSeconds());
         }
 
