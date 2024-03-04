@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Asteriod.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Asteriod.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -15,24 +27,12 @@
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Asteriod.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Projectile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Projectile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Projectile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\Projectile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{2151193D-E9D0-4C06-8F72-D018BCE7DD7B}|Asteroids\\Asteroids.vcxproj|solutionrelative:Asteroids\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +46,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Projectile.h",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Projectile.h",
               "RelativeDocumentMoniker": "Asteroids\\Projectile.h",
@@ -58,7 +58,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Projectile.cpp",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Projectile.cpp",
               "RelativeDocumentMoniker": "Asteroids\\Projectile.cpp",
@@ -70,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Asteriod.h",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Asteriod.h",
               "RelativeDocumentMoniker": "Asteroids\\Asteriod.h",
@@ -83,13 +83,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Asteriod.cpp",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Asteriod.cpp",
               "RelativeDocumentMoniker": "Asteroids\\Asteriod.cpp",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Asteriod.cpp",
               "RelativeToolTip": "Asteroids\\Asteriod.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-03T01:07:51.464Z",
               "EditorCaption": ""
@@ -102,33 +102,36 @@
               "RelativeDocumentMoniker": "Asteroids\\Player.h",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.h",
               "RelativeToolTip": "Asteroids\\Player.h",
-              "ViewState": "AQIAABAAAAAAAAAAAAAqwCMAAABOAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAABwAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T22:57:13.816Z"
+              "WhenOpened": "2024-03-02T22:57:13.816Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.cpp",
               "RelativeDocumentMoniker": "Asteroids\\Player.cpp",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\Player.cpp",
               "RelativeToolTip": "Asteroids\\Player.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAaAAAA",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAGgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T22:58:51.081Z"
+              "WhenOpened": "2024-03-02T22:58:51.081Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "main.h",
               "DocumentMoniker": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.h",
               "RelativeDocumentMoniker": "Asteroids\\main.h",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.h",
               "RelativeToolTip": "Asteroids\\main.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T22:08:45.683Z"
+              "WhenOpened": "2024-03-02T22:08:45.683Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -138,7 +141,7 @@
               "RelativeDocumentMoniker": "Asteroids\\main.cpp",
               "ToolTip": "C:\\Bigarn\\Asteroids_Git\\Asteroids\\Asteroids\\main.cpp",
               "RelativeToolTip": "Asteroids\\main.cpp",
-              "ViewState": "AQIAACoAAAAAAAAAAAAawFwAAABUAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACQAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-02T12:44:33.974Z",
               "EditorCaption": ""

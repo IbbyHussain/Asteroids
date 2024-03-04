@@ -26,6 +26,8 @@ public:
  
     void RenderProjectiles(sf::RenderWindow& window);
 
+    void IncreaseScore(int IncreaseAmount);
+
     // Getter functions
     int GetLives() const { return PlayerLives; }
 

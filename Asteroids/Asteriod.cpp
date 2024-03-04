@@ -13,6 +13,7 @@ Asteroid::Asteroid()
 
 void Asteroid::Update(sf::RenderWindow& window, float deltaTime)
 {
+    
     // Asteriod moves withdirection and speed
     AsteroidSprite.move(Direction.x * Speed * deltaTime, Direction.y * Speed * deltaTime);
 

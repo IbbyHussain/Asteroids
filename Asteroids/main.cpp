@@ -7,10 +7,10 @@
 #include <algorithm>
 // The player can move the ship forwards, and turn left and righ
 // The player can shoot bullets, that fire forwardin the direction the ship is facing
+
 // If the player collides with an asteroid they lose a life and respawn in the center of the screen.
 // After colliison with asteroid player has grace period where asteroid cannot collide with them
 // Once a player loses all their lives the game ends
-// When a bullet collides with an asteroid, both are destroyed and the player earns some score
 // When an asteroid is destroyed it splits into two smaller ones.
 
 //@TODO - Shoot projectiles in player direction
@@ -34,7 +34,10 @@ int main()
     NewPlayer->Render(window);
 
     // Store Asteroids in an array
-    const int NumOfAsteroids = 5;
+    const int NumOfAsteroids = 1;
+
+    // As asteroids are destroyed and respawned need to keep track of curretn number
+    int CurrentNumOfAsteroids = NumOfAsteroids;
     Asteroid* Asteroids[NumOfAsteroids];
 
     // Spawn 5 asteroids
@@ -63,19 +66,21 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
-        // Loop over asteroids and projectiles
+        // Collision -> Projectile and Asteroids
         auto& projectiles = NewPlayer->GetProjectilesArray();
+
+        // Loop over asteroids and projectiles
         for (auto& projectile : projectiles)
         {
-            for (auto* asteroid : Asteroids)
+            for (int i = 0; i < CurrentNumOfAsteroids; ++i)
             {
-                // Check colliison
-                if (projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
-                {
-                   
+                auto* asteroid = Asteroids[i];
 
+                // Check colliison
+                if (asteroid != nullptr && projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
+                {
                     // Destroy the projectile by removing from array if collided with asteroid
-                    auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p) 
+                    auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p)
                         {
                             return &projectile == &p;
                         });
@@ -83,24 +88,28 @@ int main()
                     projectiles.erase(projectileIt, projectiles.end());
 
                     // Destroy the asteroid
-                    auto asteroidIndex = std::find(Asteroids, Asteroids + NumOfAsteroids, asteroid);
+                    delete Asteroids[i];
+                    Asteroids[i] = nullptr;
 
-                    if (asteroidIndex != Asteroids + NumOfAsteroids) 
+                    // Shift elements in the array as we just removed an element
+                    for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
                     {
-                        // Delete the asteroid dynamically
-                        delete Asteroids[asteroidIndex - Asteroids];
-
-                        // Shift elements in the array as we just removed an element
-                        for (auto i = asteroidIndex - Asteroids; i < NumOfAsteroids - 1; ++i)
-                        {
-                            Asteroids[i] = Asteroids[i + 1];
-                        }
-
-                        // Break out of the inner loop after destroying the asteroid
-                        break;
+                        Asteroids[j] = Asteroids[j + 1];
                     }
 
-                    
+                    // Nullify the last element to avoid accessing a dangling pointer
+                    Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
+
+                    // Decrease the count of asteroids
+                    --CurrentNumOfAsteroids;
+
+                    // Update players score
+                    NewPlayer->IncreaseScore(10);
+                    UpdatePlayerScoreText(window, NewPlayer);
+     
+
+                    // Break out of the loop 
+                    break;
                 }
             }
         }
@@ -135,24 +144,15 @@ int main()
         // Update all asteroids
         for (int i = 0; i < NumOfAsteroids; ++i)
         {
-            Asteroids[i]->Update(window, dt.asSeconds());
-            
-            
+            if (Asteroids[i] != nullptr) 
+            {
+                Asteroids[i]->Update(window, dt.asSeconds());
+            }
         }
 
-        // Lives Text position and size 
-        sf::Vector2f LivesTextPosition = { 10.f, 10.f };
-        unsigned int LivesTextSize = 24;
-        std::string LivesString = "Lives: " + std::to_string(NewPlayer->GetLives());
-
-        // Score Text position and size 
-        sf::Vector2f ScoreTextPosition = { 10.f, 50.f };
-        unsigned int ScoreTextSize = 24;
-        std::string ScoreString = "Score: " + std::to_string(NewPlayer->GetScore());
-
-        displayText(window, LivesString, sf::Color::Red, LivesTextPosition, LivesTextSize);
-        displayText(window, ScoreString, sf::Color::Red, ScoreTextPosition, ScoreTextSize);
        
+        UpdatePlayerLivesText(window, NewPlayer);
+        UpdatePlayerScoreText(window, NewPlayer);
 
         //-----------------------------------------------------------------------------------
         // Display the updated game state
@@ -181,5 +181,25 @@ void displayText(sf::RenderWindow& window, const std::string& text, const sf::Co
     sfmlText.setPosition(position);
 
     window.draw(sfmlText);
+}
+
+void UpdatePlayerLivesText(sf::RenderWindow& window, Player* PlayerToUpdate)
+{
+    // Lives Text position and size 
+    sf::Vector2f LivesTextPosition = { 10.f, 10.f };
+    unsigned int LivesTextSize = 24;
+    std::string LivesString = "Lives: " + std::to_string(PlayerToUpdate->GetLives());
+
+    displayText(window, LivesString, sf::Color::Red, LivesTextPosition, LivesTextSize);
+}
+
+void UpdatePlayerScoreText(sf::RenderWindow& window, Player* PlayerToUpdate)
+{
+    // Score Text position and size 
+    sf::Vector2f ScoreTextPosition = { 10.f, 50.f };
+    unsigned int ScoreTextSize = 24;
+    std::string ScoreString = "Score: " + std::to_string(PlayerToUpdate->GetScore());
+
+    displayText(window, ScoreString, sf::Color::Red, ScoreTextPosition, ScoreTextSize);
 }
 

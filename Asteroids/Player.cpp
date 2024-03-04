@@ -100,6 +100,11 @@ void Player::RenderProjectiles(sf::RenderWindow& window)
     }
 }
 
+void Player::IncreaseScore(int IncreaseAmount)
+{
+    PlayerScore += IncreaseAmount;
+}
+
 void Player::UpdateProjectiles(sf::RenderWindow& window, float deltaTime)
 {
     // Update all projectiles
