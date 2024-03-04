@@ -17,12 +17,15 @@ public:
     // A basic Constructor
     Asteroid();
 
-    void Update(sf::RenderWindow& window);
+    void Update(sf::RenderWindow& window, float deltaTime);
     void Render(sf::RenderWindow& window);
 
     void UpdateAsteroidSize(AsteroidSize NewSize);
 
+    void SetAsteroidPosition();
 
+    //Getter functions
+    sf::Sprite GetAsteroidSprite() const { return AsteroidSprite; }
 
 private:
 
@@ -32,6 +35,8 @@ private:
 
     sf::Texture AsteroidTexture;
     sf::Sprite AsteroidSprite;
+
+    sf::Vector2f Direction;
 
 
 

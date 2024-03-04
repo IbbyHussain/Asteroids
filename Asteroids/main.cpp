@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Projectile.h"
+#include "Asteriod.h"
 
 //@TODO - Shoot projectiles in player direction
 //@TODO - Spawn asteriods (outside of screen). Move with constant velocity
@@ -16,26 +17,18 @@
 
 int main()
 {
+    std::srand(std::time(0));
+
     sf::RenderWindow window(sf::VideoMode(800, 800), "LHG Code Exercise");
     sf::Clock GameClock;
-
-    // Grab textures and set up sprites
-    sf::Texture AsteroidTexture;
-
-    //PlayerTexture.loadFromFile("Assets/Ship.png");
-    AsteroidTexture.loadFromFile("Assets/Asteroid.png");
-
-    sf::Sprite Asteroid;
-    Asteroid.setTexture(AsteroidTexture);
 
     // Create a instance of the player 
     Player* NewPlayer = new Player();
     NewPlayer->SetLives(5);
     NewPlayer->Render(window);
 
-    // Test projectile
-    //Projectile* newProjectile = new Projectile(500, 500);
-    //newProjectile->Render(window);
+    Asteroid* A = new Asteroid();
+    A->Render(window);
 
     while (window.isOpen())
     {
@@ -78,11 +71,7 @@ int main()
         NewPlayer->UpdateProjectiles(window, dt.asSeconds());
         NewPlayer->RenderProjectiles(window);
 
-        // Asteroid spins in the center of the screen
-        Asteroid.setPosition(400, 400);
-        float Rotation = 90.0f;
-        Asteroid.rotate(Rotation * dt.asSeconds());
-        window.draw(Asteroid);
+        A->Update(window, dt.asSeconds());
 
         // Lives Text position and size 
         sf::Vector2f LivesTextPosition = { 10.f, 10.f };
