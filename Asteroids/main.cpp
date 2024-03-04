@@ -26,12 +26,12 @@ int main()
 
     // Create a instance of the player 
     Player* NewPlayer = new Player();
-    NewPlayer->SetLives(2);
+    NewPlayer->SetLives(3);
     NewPlayer->SetScore(0);
     NewPlayer->Render(window);
 
     // Store Asteroids in an array
-    const int NumOfAsteroids = 2;
+    const int NumOfAsteroids = 7;
 
     // As asteroids are destroyed and respawned need to keep track of curretn number
     int CurrentNumOfAsteroids = NumOfAsteroids;
