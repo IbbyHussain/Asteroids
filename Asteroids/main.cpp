@@ -82,6 +82,24 @@ int main()
 
                     projectiles.erase(projectileIt, projectiles.end());
 
+                    // Destroy the asteroid
+                    auto asteroidIndex = std::find(Asteroids, Asteroids + NumOfAsteroids, asteroid);
+
+                    if (asteroidIndex != Asteroids + NumOfAsteroids) 
+                    {
+                        // Delete the asteroid dynamically
+                        delete Asteroids[asteroidIndex - Asteroids];
+
+                        // Shift elements in the array as we just removed an element
+                        for (auto i = asteroidIndex - Asteroids; i < NumOfAsteroids - 1; ++i)
+                        {
+                            Asteroids[i] = Asteroids[i + 1];
+                        }
+
+                        // Break out of the inner loop after destroying the asteroid
+                        break;
+                    }
+
                     
                 }
             }
@@ -118,6 +136,8 @@ int main()
         for (int i = 0; i < NumOfAsteroids; ++i)
         {
             Asteroids[i]->Update(window, dt.asSeconds());
+            
+            
         }
 
         // Lives Text position and size 
