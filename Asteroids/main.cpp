@@ -66,6 +66,19 @@ int main()
         //-----------------------------------------------------------------------------------
         // Game logic can go here
 
+        // Grace period timer 
+        if (NewPlayer->bIsGracePeriodActive()) 
+        {
+            // Check if the grace period has finished (3 seconds)
+            if (NewPlayer->GetGracePeriodElapsedTime() >= sf::seconds(3.0f)) 
+            {
+                // Stops the grace period
+                NewPlayer->DisableGracePeriod();
+
+                //std::cout << "grace period over";
+            }
+        }
+
         // Collision -> Projectile and Asteroids
         auto& projectiles = NewPlayer->GetProjectilesArray();
 

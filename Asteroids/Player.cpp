@@ -116,6 +116,9 @@ void Player::DecreasePlayerLives()
 
     bGracePeriodActive = true;
 
+    // Reset the grace period timer
+    GracePeriodTimer.restart();
+
     // Player has died
     if(PlayerLives == 0)
     {

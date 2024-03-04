@@ -30,6 +30,11 @@ public:
 
     void DecreasePlayerLives();
 
+    sf::Time GetGracePeriodElapsedTime() const { return GracePeriodTimer.getElapsedTime(); }
+
+    // Stops grace period
+    void DisableGracePeriod() { bGracePeriodActive = false; }
+
     // Getter functions
     int GetLives() const { return PlayerLives; }
 
@@ -68,4 +73,7 @@ private:
     float TimeSinceLastShot;
 
     bool bGracePeriodActive;
+
+    // Timer for grace period
+    sf::Clock GracePeriodTimer;
 };
