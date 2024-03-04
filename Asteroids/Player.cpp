@@ -82,7 +82,7 @@ void Player::SpawnProjectile(float deltaTime)
     if (TimeSinceLastShot >= ShootCooldown) 
     {
         // Spawn projectile and add to array
-        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x, PlayerSprite.getPosition().y);
+        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x, PlayerSprite.getPosition().y, 0.0f);
 
         //Reset timer
         TimeSinceLastShot = 0.0f; 
@@ -119,10 +119,6 @@ void Player::DecreasePlayerLives()
 
     std::cout << "activate grace period";
     
-    
-    
-   
-
     // Reset the grace period timer
     GracePeriodTimer.restart();
 
@@ -147,6 +143,33 @@ void Player::UpdateProjectiles(sf::RenderWindow& window, float deltaTime)
             return projectile.GetProjectileSprite().getPosition().y < 0;
         }), ProjectilesArray.end());
 }
+
+
+void Player::SpawnTripleProjectile(float deltaTime)
+{
+    // shoot cooldown
+    if (TimeSinceLastShot >= ShootCooldown)
+    {
+        // Spawn the main projectile
+        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x, PlayerSprite.getPosition().y, 0.0f);
+
+        // Calculate offsets
+        float offset = 20.0f; 
+
+        // Spawn diagonal projectiles 
+        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x - offset, PlayerSprite.getPosition().y - offset, 45.0f);
+        ProjectilesArray.emplace_back(PlayerSprite.getPosition().x + offset, PlayerSprite.getPosition().y - offset, -45.0f);
+
+        // Reset timer
+        TimeSinceLastShot = 0.0f;
+        ShootCooldown = 0.15f;
+    }
+
+    // Update the time since the last shot
+    TimeSinceLastShot += deltaTime;
+}
+
+
 
 #pragma endregion
 

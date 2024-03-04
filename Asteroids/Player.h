@@ -1,5 +1,6 @@
 #pragma once
 #include "Projectile.h"
+#include "Asteriod.h"
 #include <SFML/Graphics.hpp>
 
 class Player 
@@ -20,6 +21,8 @@ public:
     void MoveRight(float deltaTime);
 
     void SpawnProjectile(float deltaTime);
+
+    void SpawnTripleProjectile(float deltaTime);
 
     // Updates the projectiles that the player has shot
     void UpdateProjectiles(sf::RenderWindow& window, float deltaTime);
@@ -77,4 +80,6 @@ private:
 
     // Timer for grace period
     sf::Clock GracePeriodTimer;
+
+
 };

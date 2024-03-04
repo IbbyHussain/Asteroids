@@ -123,3 +123,25 @@ void Asteroid::SetAsteroidPosition()
     }
 }
 
+std::vector<Asteroid*> Asteroid::Split(sf::RenderWindow& window)
+{
+    std::vector<Asteroid*> newAsteroids;
+
+    // Create new asteroids 
+    if (Size == AsteroidSize::LARGE)
+    {
+        // Split into two medium asteroids
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+    }
+    else if (Size == AsteroidSize::MEDIUM)
+    {
+        // Split into two small asteroids
+        newAsteroids.push_back(new Asteroid(SMALL));
+        newAsteroids.push_back(new Asteroid(SMALL));
+    }
+    
+    std::cout << "Asteroid split! Current size: " << static_cast<int>(Size) << std::endl;
+
+    return newAsteroids;
+}

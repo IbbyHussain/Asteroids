@@ -24,11 +24,15 @@ public:
 
     void SetAsteroidPosition();
 
+    std::vector<Asteroid*> Split(sf::RenderWindow& window);
+
     // Getter functions
     sf::Sprite GetAsteroidSprite() const { return AsteroidSprite; }
 
     // Get the sprites bounding box
     sf::FloatRect GetBoundingBox() const { return AsteroidSprite.getGlobalBounds(); }
+
+    sf::Vector2f GetPosition() const { return AsteroidSprite.getPosition(); }
 
 private:
 

@@ -4,30 +4,25 @@
 #include "Player.h"
 #include "Projectile.h"
 #include "Asteriod.h"
+#include <ctime>
 #include <algorithm>
-// The player can move the ship forwards, and turn left and righ
-// The player can shoot bullets, that fire forwardin the direction the ship is facing
 
 
-// Once a player loses all their lives the game ends
-// When an asteroid is destroyed it splits into two smaller ones.
 
-//@TODO - Shoot projectiles in player direction
-//@TODO - Player collision and grace period
-//@TODO - Player death (Game Over)
-//@TODO - Bullet collision and player score and lives update
+
+
+
 //@TODO - Asteriod splitting (Large -> Medium -> Small)
 
-#include <SFML/Graphics.hpp>
+
 
 int main()
 {
-    std::srand(std::time(0));
+    std::srand(static_cast<unsigned int>(std::time(0)));
+    //std::srand(std::time(0));
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "LHG Code Exercise");
     sf::Clock GameClock;
-
-    
 
     // Create a instance of the player 
     Player* NewPlayer = new Player();
@@ -83,12 +78,6 @@ int main()
                 }
             }
 
-
-
-
-
-
-
             // Collision -> Projectile and Asteroids
             auto& projectiles = NewPlayer->GetProjectilesArray();
 
@@ -109,6 +98,18 @@ int main()
                             });
 
                         projectiles.erase(projectileIt, projectiles.end());
+
+                        // Split asteriods
+                        std::vector<Asteroid*> newAsteroids = asteroid->Split(window);
+
+                        for (auto* newAsteroid : newAsteroids)
+                        {
+                            if (newAsteroid != nullptr)
+                            {
+                                newAsteroid->Render(window);
+                            }
+                           
+                        }
 
                         // Destroy the asteroid
                         delete Asteroids[i];
@@ -136,14 +137,6 @@ int main()
                     }
                 }
             }
-
-
-
-
-
-
-
-
 
             // Collision -> Player and Asteroids
 
@@ -189,21 +182,30 @@ int main()
             {
                 NewPlayer->MoveForward(dt.asSeconds());
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
                 NewPlayer->MoveBackward(dt.asSeconds());
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
                 NewPlayer->MoveLeft(dt.asSeconds());
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
                 NewPlayer->MoveRight(dt.asSeconds());
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
                 NewPlayer->SpawnProjectile(dt.asSeconds());
+            }
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+            {
+                NewPlayer->SpawnTripleProjectile(dt.asSeconds());
             }
 
             // Update the player sprite and the projectiles
