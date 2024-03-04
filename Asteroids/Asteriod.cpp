@@ -6,19 +6,8 @@ Asteroid::Asteroid()
 {
     Speed = 150;
 
-    Size = AsteroidSize::SMALL;
+    Size = AsteroidSize::LARGE;
 
-    SetAsteroidPosition();
-
-    UpdateAsteroidSize(Size);
-}
-
-Asteroid::Asteroid(AsteroidSize newSize)
-{
-    Speed = 150;
-
-    // Other initialization code
-    UpdateAsteroidSize(newSize);
     SetAsteroidPosition();
 }
 
@@ -75,17 +64,14 @@ void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
     {
     case SMALL:
         std::cout << "The asteroid is small." << std::endl;
-        AsteroidSprite.setScale(1.0f, 1.0f);
         break;
 
     case MEDIUM:
         std::cout << "The asteroid is medium." << std::endl;
-        AsteroidSprite.setScale(1.5f, 1.5f);
         break;
 
     case LARGE:
         std::cout << "The asteroid is large." << std::endl;
-        AsteroidSprite.setScale(2.0f, 2.0f);
         break;
 
     }
@@ -134,23 +120,3 @@ void Asteroid::SetAsteroidPosition()
     }
 }
 
-void Asteroid::Split(std::vector<Asteroid*>& asteroids)
-{
-    // Create new asteroids based on the current size
-    if (Size == AsteroidSize::LARGE)
-    {
-        // Split into two medium asteroids
-        asteroids.push_back(new Asteroid(MEDIUM));
-        asteroids.push_back(new Asteroid(MEDIUM));
-    }
-    else if (Size == AsteroidSize::MEDIUM)
-    {
-        // Split into two small asteroids
-        asteroids.push_back(new Asteroid(SMALL));
-        asteroids.push_back(new Asteroid(SMALL));
-    }
-    // If it's a small asteroid, no further splitting
-
-    // Destroy the current asteroid
-    delete this;
-}
