@@ -6,7 +6,6 @@
 #include "Asteriod.h"
 
 //@TODO - Shoot projectiles in player direction
-//@TODO - Spawn asteriods (outside of screen). Move with constant velocity
 //@TODO - Screen Wrapping
 //@TODO - Player collision and grace period
 //@TODO - Player death (Game Over)

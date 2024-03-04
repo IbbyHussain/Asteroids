@@ -11,6 +11,35 @@ Player::Player()
 
 void Player::Update(sf::RenderWindow& window)
 {
+    // Get Current player position
+    sf::Vector2f PlayerPosition = PlayerSprite.getPosition();
+
+    // if the Player has gone off the screen
+    // Wrap to the right side
+    if (PlayerPosition.x < 0)
+    {
+        PlayerPosition.x = 800;
+    }
+
+    // Wrap to the left side
+    else if (PlayerPosition.x > 800)
+    {
+        PlayerPosition.x = 0;
+    }
+
+    // Wrap to the bottom
+    if (PlayerPosition.y < 0)
+    {
+        PlayerPosition.y = 800;
+    }
+
+    // Wrap to the top
+    else if (PlayerPosition.y > 800)
+    {
+        PlayerPosition.y = 0;
+    }
+
+    PlayerSprite.setPosition(PlayerPosition);
     window.draw(PlayerSprite);
 }
 
