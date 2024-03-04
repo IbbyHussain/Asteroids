@@ -2,13 +2,13 @@
 #include <iostream>
 #include <cstdlib>
 
-Asteroid::Asteroid()
+Asteroid::Asteroid(AsteroidSize NewSize)
 {
     Speed = 150;
 
-    Size = AsteroidSize::LARGE;
-
     SetAsteroidPosition();
+
+    UpdateAsteroidSize(NewSize);
 }
 
 void Asteroid::Update(sf::RenderWindow& window, float deltaTime)
@@ -64,14 +64,17 @@ void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
     {
     case SMALL:
         std::cout << "The asteroid is small." << std::endl;
+        AsteroidSprite.setScale(sf::Vector2f(1.0f, 1.0f));
         break;
 
     case MEDIUM:
         std::cout << "The asteroid is medium." << std::endl;
+        AsteroidSprite.setScale(sf::Vector2f(1.5f, 1.5f));
         break;
 
     case LARGE:
         std::cout << "The asteroid is large." << std::endl;
+        AsteroidSprite.setScale(sf::Vector2f(2.0f, 2.0f));
         break;
 
     }

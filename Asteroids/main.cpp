@@ -45,7 +45,7 @@ int main()
     // Spawn 5 asteroids
     for (int i = 0; i < NumOfAsteroids; ++i) 
     {
-        Asteroids[i] = new Asteroid();
+        Asteroids[i] = new Asteroid(LARGE);
         Asteroids[i]->Render(window);
     }
 
@@ -82,6 +82,12 @@ int main()
                     std::cout << "grace period over";
                 }
             }
+
+
+
+
+
+
 
             // Collision -> Projectile and Asteroids
             auto& projectiles = NewPlayer->GetProjectilesArray();
@@ -130,6 +136,14 @@ int main()
                     }
                 }
             }
+
+
+
+
+
+
+
+
 
             // Collision -> Player and Asteroids
 

@@ -15,7 +15,7 @@ class Asteroid
 public:
 
     // A basic Constructor
-    Asteroid();
+    Asteroid(AsteroidSize NewSize);
 
     void Update(sf::RenderWindow& window, float deltaTime);
     void Render(sf::RenderWindow& window);
