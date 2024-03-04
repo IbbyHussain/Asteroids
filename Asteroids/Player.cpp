@@ -6,12 +6,9 @@ Player::Player()
     PlayerLives = 3;
     PlayerScore = 0;
     Speed = 200;
-
     ShootCooldown = 0.0f; // Initial cooldown needs to be 0
 
     bGracePeriodActive = false;
-
-    GracePeriodCooldown = 0.0f;
 }
 
 void Player::Update(sf::RenderWindow& window)
@@ -110,34 +107,14 @@ void Player::IncreaseScore(int IncreaseAmount)
     PlayerScore += IncreaseAmount;
 }
 
-void Player::DecreasePlayerLives(float deltaTime)
+void Player::DecreasePlayerLives()
 {
     PlayerLives--;
 
     //Respawn
     PlayerSprite.setPosition(400, 400);
 
-
     bGracePeriodActive = true;
-
-
-    if (TimeSinceLastGracePeriod >= GracePeriodCooldown)
-    {
-        bGracePeriodActive = false;
-
-        //Reset timer
-        TimeSinceLastGracePeriod = 0.0f;
-        GracePeriodCooldown = 3.0f;
-    }
-
-    // Update the time since the last shot
-    TimeSinceLastGracePeriod += deltaTime;
-
-
-
-
-
-
 
     // Player has died
     if(PlayerLives == 0)

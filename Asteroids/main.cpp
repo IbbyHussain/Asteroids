@@ -127,7 +127,7 @@ int main()
                 if (asteroid != nullptr && NewPlayer->GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                 {
                     // will also handle respawning
-                    NewPlayer->DecreasePlayerLives(dt.asSeconds());
+                    NewPlayer->DecreasePlayerLives();
 
                     // delete the hit asteroid
                     delete Asteroids[i];
