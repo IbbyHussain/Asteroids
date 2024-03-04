@@ -4,9 +4,15 @@
 #include "Player.h"
 #include "Projectile.h"
 #include "Asteriod.h"
+//The player can move the ship forwards, and turn left and righ
+//The player can shoot bullets, that fire forwardin the direction the ship is facing
+//If the player collides with an asteroid they lose a life and respawn in the center of the screen.
+//After colliison with asteroid player has grace period where asteroid cannot collide with them
+//Once a player loses all their lives the game ends
+//When a bullet collides with an asteroid, both are destroyed and the player earns some score
+//When an asteroid is destroyed it splits into two smaller ones.
 
 //@TODO - Shoot projectiles in player direction
-//@TODO - Screen Wrapping
 //@TODO - Player collision and grace period
 //@TODO - Player death (Game Over)
 //@TODO - Bullet collision and player score and lives update
@@ -23,11 +29,19 @@ int main()
 
     // Create a instance of the player 
     Player* NewPlayer = new Player();
-    NewPlayer->SetLives(5);
+    NewPlayer->SetLives(3);
     NewPlayer->Render(window);
 
-    Asteroid* A = new Asteroid();
-    A->Render(window);
+    // Store Asteroids in an array
+    const int NumOfAsteroids = 5;
+    Asteroid* Asteroids[NumOfAsteroids];
+
+    // Spawn 5 asteroids
+    for (int i = 0; i < NumOfAsteroids; ++i) 
+    {
+        Asteroids[i] = new Asteroid();
+        Asteroids[i]->Render(window);
+    }
 
     while (window.isOpen())
     {
@@ -70,7 +84,11 @@ int main()
         NewPlayer->UpdateProjectiles(window, dt.asSeconds());
         NewPlayer->RenderProjectiles(window);
 
-        A->Update(window, dt.asSeconds());
+        // Update all asteroids
+        for (int i = 0; i < NumOfAsteroids; ++i)
+        {
+            Asteroids[i]->Update(window, dt.asSeconds());
+        }
 
         // Lives Text position and size 
         sf::Vector2f LivesTextPosition = { 10.f, 10.f };
