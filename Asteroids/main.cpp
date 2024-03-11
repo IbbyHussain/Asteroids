@@ -30,27 +30,35 @@ int main()
     NewPlayer->SetScore(0);
     NewPlayer->Render(window);
 
-    std::vector<Asteroid*> newAsteroids;
+    //std::vector<Asteroid*> newAsteroids;
 
-    //Asteroid* a = new Asteroid(LARGE);
-    //a->Render(window);
+    std::vector<Asteroid*> Asteroids; // Use std::vector instead of array
 
-    // Store Asteroids in an array
     const int NumOfAsteroids = 1;
 
-    // As asteroids are destroyed and respawned need to keep track of curretn number
-    int CurrentNumOfAsteroids = NumOfAsteroids;
-    Asteroid* Asteroids[NumOfAsteroids];
-
     // Spawn 5 asteroids
-    for (int i = 0; i < NumOfAsteroids; ++i) 
+    for (int i = 0; i < NumOfAsteroids; ++i)
     {
-        Asteroids[i] = new Asteroid(LARGE);
-        Asteroids[i]->Render(window);
+        Asteroids.push_back(new Asteroid(LARGE)); // Add asteroid to the vector
+        Asteroids.back()->Render(window); // Render the last added asteroid
     }
 
-    
 
+    // Store Asteroids in an array
+    //const int NumOfAsteroids = 1;
+
+    //// As asteroids are destroyed and respawned need to keep track of curretn number
+    //int CurrentNumOfAsteroids = NumOfAsteroids;
+    //Asteroid* Asteroids[NumOfAsteroids];
+
+    //// Spawn 5 asteroids
+    //for (int i = 0; i < NumOfAsteroids; ++i) 
+    //{
+    //    Asteroids[i] = new Asteroid(LARGE);
+    //    Asteroids[i]->Render(window);
+    //}
+
+    
     while (window.isOpen() )
     {
         // Get the delta time for the game update
@@ -88,94 +96,58 @@ int main()
             // Collision -> Projectile and Asteroids
             auto& projectiles = NewPlayer->GetProjectilesArray();
 
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // Loop over asteroids and projectiles
+            // Loop over all asteroids and projectiles
             for (auto& projectile : projectiles)
             {
-                for (int i = 0; i < CurrentNumOfAsteroids; ++i)
+                for (auto& asteroid : Asteroids)
                 {
-                    auto* asteroid = Asteroids[i];
-
-                    // Check colliison
+                    // Check collision
                     if (asteroid != nullptr && projectile.GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                     {
-                        // Destroy the projectile by removing from array if collided with asteroid
                         auto projectileIt = std::remove_if(projectiles.begin(), projectiles.end(), [&projectile](const auto& p)
                             {
                                 return &projectile == &p;
                             });
 
+                        // On collision destroy projectile
                         projectiles.erase(projectileIt, projectiles.end());
 
+                        // Mark original asteroid for delete
+                        Asteroid* ToDelete = asteroid;
+                        ToDelete->SetShouldAsteroidBeDeleted(true);
 
-
-                       
-
-
-
-
-                        // Split asteriods
-                        newAsteroids = asteroid->Split(window);
+                        // Asteroid splits into two smaller asteroids
+                        std::vector<Asteroid*> newAsteroids = asteroid->Split(window);
 
                         for (auto* newAsteroid : newAsteroids)
                         {
-                            //std::cout << "asteroid ";
-                            if(newAsteroid)
+                            if (newAsteroid)
                             {
-                                
-                                std::cout << "asteriod is valid";
+                                //std::cout << "asteriod is valid";
                                 newAsteroid->Render(window);
+                                Asteroids.push_back(newAsteroid); // Add new asteroid to the vector
                             }
                         }
 
-                       
-
-
-
-
-
-
-
-
-
-                        // Destroy the asteroid
-                        delete Asteroids[i];
-                        Asteroids[i] = nullptr;
-
-                        // Shift elements in the array as we just removed an element
-                        for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
+                        // Delete original asteroid 
+                        for (auto& asteroid : Asteroids)
                         {
-                            Asteroids[j] = Asteroids[j + 1];
+                            if (asteroid != nullptr && asteroid->ShouldAsteroidBeDeleted())
+                            {
+                                delete asteroid;
+                                asteroid = nullptr;
+
+                                // Remove asteroid from vector 
+                                Asteroids.erase(std::remove(Asteroids.begin(), Asteroids.end(), asteroid), Asteroids.end());
+                            }
                         }
+ 
+                        Asteroids.erase(std::remove(Asteroids.begin(), Asteroids.end(), nullptr), Asteroids.end());
 
-                        // Set asteroids to null
-                        Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
-
-                        // Decrease the number of asteroids
-                        --CurrentNumOfAsteroids;
-
-                        // Update players score
+                        // Update Player stats
                         NewPlayer->IncreaseScore(10);
                         UpdatePlayerScoreText(window, NewPlayer);
 
-
-                        // Break out of the loop 
                         break;
                     }
                 }
@@ -183,42 +155,23 @@ int main()
 
             // Collision -> Player and Asteroids
 
-            // Can only collide with asteroids if grace period is not active
             if (!NewPlayer->bIsGracePeriodActive())
             {
-                for (int i = 0; i < CurrentNumOfAsteroids; ++i)
+                for (auto& asteroid : Asteroids)
                 {
-                    auto* asteroid = Asteroids[i];
-
-                    // Check colliison
                     if (asteroid != nullptr && NewPlayer->GetBoundingBox().intersects(asteroid->GetBoundingBox()))
                     {
-                        // will also handle respawning
                         NewPlayer->DecreasePlayerLives();
 
+                        delete asteroid;
+                        asteroid = nullptr;
 
-                        // delete the hit asteroid
-                        delete Asteroids[i];
-                        Asteroids[i] = nullptr;
+                        Asteroids.erase(std::remove(Asteroids.begin(), Asteroids.end(), nullptr), Asteroids.end());
 
-                        // Shift elements in the array as we just removed an element
-                        for (int j = i; j < CurrentNumOfAsteroids - 1; ++j)
-                        {
-                            Asteroids[j] = Asteroids[j + 1];
-                        }
-
-                        // Set asteroids to null
-                        Asteroids[CurrentNumOfAsteroids - 1] = nullptr;
-
-                        // Decrease the number of asteroids
-                        --CurrentNumOfAsteroids;
-
-                        // Break out of the loop 
                         break;
                     }
                 }
             }
-
 
             // Handle player movement inputs, using W,A,S,D
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -257,7 +210,7 @@ int main()
             NewPlayer->RenderProjectiles(window);
 
             // Update all asteroids
-            for (int i = 0; i < NumOfAsteroids; ++i)
+      /*      for (int i = 0; i < NumOfAsteroids; ++i)
             {
                 if (Asteroids[i] != nullptr)
                 {
@@ -273,6 +226,14 @@ int main()
                     a->Update(window, dt.asSeconds());
                 }
                 
+            }*/
+
+            for (auto& asteroid : Asteroids)
+            {
+                if (asteroid != nullptr)
+                {
+                    asteroid->Update(window, dt.asSeconds());
+                }
             }
 
             //a->Update(window, dt.asSeconds());

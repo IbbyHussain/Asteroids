@@ -1,2 +1,40 @@
-﻿  main.cpp
+﻿  Asteriod.cpp
+  main.cpp
+  Player.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103): warning C4244:             _Ty=double
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103): warning C4244:         ]
+  (compiling source file 'Player.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(727,103):
+  the template instantiation context (the oldest one first) is
+  	C:\Users\ibrah\Documents\GitHub\Asteroids\Asteroids\Player.cpp(163,25):
+  	see reference to function template instantiation 'void std::vector<Projectile,std::allocator<Projectile>>::emplace_back<T,T,float,double>(T &&,T &&,float &&,double &&)' being compiled
+          with
+          [
+              T=float
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\vector(862,24):
+  	see reference to function template instantiation '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<float,float,float,double>(float &&,float &&,float &&,double &&)' being compiled
+          with
+          [
+              _Ty=Projectile
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\vector(780,20):
+  	see reference to function template instantiation '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<float,float,float,double>(float &&,float &&,float &&,double &&)' being compiled
+          with
+          [
+              _Ty=Projectile
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\vector(798,27):
+  	see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float,float,float,double>(_Alloc &,_Objty *const ,float &&,float &&,float &&,double &&)' being compiled
+          with
+          [
+              _Alloc=std::allocator<Projectile>,
+              _Ty=Projectile,
+              _Objty=Projectile
+          ]
+  
+  Generating Code...
   Asteroids.vcxproj -> C:\Users\ibrah\Documents\GitHub\Asteroids\Debug\Asteroids.exe

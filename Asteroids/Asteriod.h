@@ -34,6 +34,10 @@ public:
 
     sf::Vector2f GetPosition() const { return AsteroidSprite.getPosition(); }
 
+    bool ShouldAsteroidBeDeleted() const { return bDelete; }
+
+    void SetShouldAsteroidBeDeleted(bool bNewValue) { bDelete = bNewValue; }
+
 private:
 
     AsteroidSize Size;
@@ -44,6 +48,8 @@ private:
     sf::Sprite AsteroidSprite;
 
     sf::Vector2f Direction;
+
+    bool bDelete = false; // should this asteroid be deleted
 
 
 
