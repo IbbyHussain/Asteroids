@@ -30,9 +30,9 @@ int main()
     NewPlayer->SetScore(0);
     NewPlayer->Render(window);
 
-    //std::vector<Asteroid*> newAsteroids;
 
-    std::vector<Asteroid*> Asteroids; // Use std::vector instead of array
+
+    std::vector<Asteroid*> Asteroids; 
 
     const int NumOfAsteroids = 1;
 
@@ -43,22 +43,6 @@ int main()
         Asteroids.back()->Render(window); // Render the last added asteroid
     }
 
-
-    // Store Asteroids in an array
-    //const int NumOfAsteroids = 1;
-
-    //// As asteroids are destroyed and respawned need to keep track of curretn number
-    //int CurrentNumOfAsteroids = NumOfAsteroids;
-    //Asteroid* Asteroids[NumOfAsteroids];
-
-    //// Spawn 5 asteroids
-    //for (int i = 0; i < NumOfAsteroids; ++i) 
-    //{
-    //    Asteroids[i] = new Asteroid(LARGE);
-    //    Asteroids[i]->Render(window);
-    //}
-
-    
     while (window.isOpen() )
     {
         // Get the delta time for the game update
@@ -210,24 +194,6 @@ int main()
             NewPlayer->RenderProjectiles(window);
 
             // Update all asteroids
-      /*      for (int i = 0; i < NumOfAsteroids; ++i)
-            {
-                if (Asteroids[i] != nullptr)
-                {
-                    Asteroids[i]->Update(window, dt.asSeconds());
-                }
-            }
-
-            for(auto a : newAsteroids)
-            {
-                if(a)
-                {
-                    std::cout << "a is valid";
-                    a->Update(window, dt.asSeconds());
-                }
-                
-            }*/
-
             for (auto& asteroid : Asteroids)
             {
                 if (asteroid != nullptr)
@@ -235,8 +201,6 @@ int main()
                     asteroid->Update(window, dt.asSeconds());
                 }
             }
-
-            //a->Update(window, dt.asSeconds());
 
             // Set game over
             if (NewPlayer->GetLives() <= 0)
@@ -250,8 +214,6 @@ int main()
                     Asteroids[i] = nullptr;
                 }
             }
-
-
 
             UpdatePlayerLivesText(window, NewPlayer);
             UpdatePlayerScoreText(window, NewPlayer);

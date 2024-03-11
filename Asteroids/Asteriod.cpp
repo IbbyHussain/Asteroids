@@ -60,20 +60,23 @@ void Asteroid::Render(sf::RenderWindow& window)
 
 void Asteroid::UpdateAsteroidSize(AsteroidSize NewSize)
 {
+    Size = NewSize;
+
     switch (NewSize) 
     {
     case SMALL:
-        std::cout << "The asteroid is small." << std::endl;
+        //std::cout << "The asteroid is small." << std::endl;
+        
         AsteroidSprite.setScale(sf::Vector2f(1.0f, 1.0f));
         break;
 
     case MEDIUM:
-        std::cout << "The asteroid is medium." << std::endl;
+        //std::cout << "The asteroid is medium." << std::endl;
         AsteroidSprite.setScale(sf::Vector2f(1.5f, 1.5f));
         break;
 
     case LARGE:
-        std::cout << "The asteroid is large." << std::endl;
+        //std::cout << "The asteroid is large." << std::endl;
         AsteroidSprite.setScale(sf::Vector2f(2.0f, 2.0f));
         break;
 
@@ -128,12 +131,27 @@ std::vector<Asteroid*> Asteroid::Split(sf::RenderWindow& window)
 {
     std::vector<Asteroid*> newAsteroids;
 
-    std::cout << "called";
+    // Create new asteroids, based on size
+    if(Size == LARGE)
+    {
+        //std::cout << "original ast is large";
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+        newAsteroids.push_back(new Asteroid(MEDIUM));
+    }
 
-    // Create new asteroids 
-    
-    newAsteroids.push_back(new Asteroid(MEDIUM));
-    newAsteroids.push_back(new Asteroid(MEDIUM));
+    else if(Size == MEDIUM)
+    {
+        //std::cout << "original ast is Medium";
+        newAsteroids.push_back(new Asteroid(SMALL));
+        newAsteroids.push_back(new Asteroid(SMALL));
+    }
+
+    else
+    {
+        //std::cout << "original ast is small";
+        newAsteroids.push_back(nullptr);
+        newAsteroids.push_back(nullptr);
+    }
 
     return newAsteroids;
 
