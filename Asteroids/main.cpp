@@ -30,8 +30,13 @@ int main()
     NewPlayer->SetScore(0);
     NewPlayer->Render(window);
 
+    std::vector<Asteroid*> newAsteroids;
+
+    //Asteroid* a = new Asteroid(LARGE);
+    //a->Render(window);
+
     // Store Asteroids in an array
-    const int NumOfAsteroids = 7;
+    const int NumOfAsteroids = 1;
 
     // As asteroids are destroyed and respawned need to keep track of curretn number
     int CurrentNumOfAsteroids = NumOfAsteroids;
@@ -43,6 +48,8 @@ int main()
         Asteroids[i] = new Asteroid(LARGE);
         Asteroids[i]->Render(window);
     }
+
+    
 
     while (window.isOpen() )
     {
@@ -81,6 +88,23 @@ int main()
             // Collision -> Projectile and Asteroids
             auto& projectiles = NewPlayer->GetProjectilesArray();
 
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // Loop over asteroids and projectiles
             for (auto& projectile : projectiles)
             {
@@ -99,17 +123,36 @@ int main()
 
                         projectiles.erase(projectileIt, projectiles.end());
 
+
+
+                       
+
+
+
+
                         // Split asteriods
-                        std::vector<Asteroid*> newAsteroids = asteroid->Split(window);
+                        newAsteroids = asteroid->Split(window);
 
                         for (auto* newAsteroid : newAsteroids)
                         {
-                            if (newAsteroid != nullptr)
+                            //std::cout << "asteroid ";
+                            if(newAsteroid)
                             {
+                                
+                                std::cout << "asteriod is valid";
                                 newAsteroid->Render(window);
                             }
-                           
                         }
+
+                       
+
+
+
+
+
+
+
+
 
                         // Destroy the asteroid
                         delete Asteroids[i];
@@ -221,6 +264,18 @@ int main()
                     Asteroids[i]->Update(window, dt.asSeconds());
                 }
             }
+
+            for(auto a : newAsteroids)
+            {
+                if(a)
+                {
+                    std::cout << "a is valid";
+                    a->Update(window, dt.asSeconds());
+                }
+                
+            }
+
+            //a->Update(window, dt.asSeconds());
 
             // Set game over
             if (NewPlayer->GetLives() <= 0)
