@@ -8,14 +8,6 @@
 #include <algorithm>
 
 
-
-
-
-
-//@TODO - Asteriod splitting (Large -> Medium -> Small)
-
-
-
 int main()
 {
     std::srand(static_cast<unsigned int>(std::time(0)));
@@ -34,7 +26,7 @@ int main()
 
     std::vector<Asteroid*> Asteroids; 
 
-    const int NumOfAsteroids = 1;
+    const int NumOfAsteroids = 6;
 
     // Spawn 5 asteroids
     for (int i = 0; i < NumOfAsteroids; ++i)
