@@ -200,11 +200,11 @@ int main()
                 //std::cout << "PLAYER HAS DIED";
                 bGameOver = true;
 
-                for (int i = 0; i < NumOfAsteroids; ++i)
+                /*for (int i = 0; i < NumOfAsteroids; ++i)
                 {
                     delete Asteroids[i];
                     Asteroids[i] = nullptr;
-                }
+                }*/
             }
 
             UpdatePlayerLivesText(window, NewPlayer);
